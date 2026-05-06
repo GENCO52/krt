@@ -165,7 +165,7 @@ body {
 /* Header & Navbar */
 .header {
     position: fixed;
-    top: 36px;
+    top: 27px;
     left: 0;
     width: 100%;
     z-index: 1000;
