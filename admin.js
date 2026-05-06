@@ -45,10 +45,25 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    let editingId = null;
+
     // Modal Events
-    addBtn.addEventListener('click', () => modal.classList.add('show'));
-    closeBtn.addEventListener('click', () => modal.classList.remove('show'));
-    cancelBtn.addEventListener('click', () => modal.classList.remove('show'));
+    addBtn.addEventListener('click', () => {
+        editingId = null;
+        form.reset();
+        document.getElementById('modal-title').innerText = 'Yeni Referans Ekle';
+        document.getElementById('save-btn').innerHTML = '<i class="fas fa-save"></i> Kaydet';
+        modal.classList.add('show');
+    });
+
+    const closeModal = () => {
+        modal.classList.remove('show');
+        form.reset();
+        editingId = null;
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
 
     // Load existing references
     async function loadReferences() {
@@ -62,12 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (error) throw error;
 
+            listContainer.innerHTML = '';
             if (data.length === 0) {
                 listContainer.innerHTML = '<div class="loading-text">Henüz referans eklenmemiş.</div>';
                 return;
             }
 
-            listContainer.innerHTML = '';
             data.forEach(ref => {
                 const card = document.createElement('div');
                 card.className = 'admin-ref-card';
@@ -78,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="admin-ref-cat">${ref.category}</div>
                     </div>
                     <div class="admin-ref-actions">
+                        <button class="btn btn-outline btn-sm" onclick="editReference('${ref.id}')"><i class="fas fa-edit text-orange"></i> Düzenle</button>
                         <button class="btn btn-outline btn-sm" onclick="deleteReference('${ref.id}')"><i class="fas fa-trash text-orange"></i> Sil</button>
                     </div>
                 `;
@@ -88,6 +104,32 @@ document.addEventListener('DOMContentLoaded', () => {
             listContainer.innerHTML = `<div class="loading-text text-orange">Yükleme hatası: ${error.message}</div>`;
         }
     }
+
+    // Edit Reference
+    window.editReference = async (id) => {
+        try {
+            const { data, error } = await supabase
+                .from('references')
+                .select('*')
+                .eq('id', id)
+                .single();
+            
+            if (error) throw error;
+
+            editingId = id;
+            document.getElementById('modal-title').innerText = 'Referansı Düzenle';
+            document.getElementById('save-btn').innerHTML = '<i class="fas fa-save"></i> Güncelle';
+            
+            document.getElementById('ref-title').value = data.title;
+            document.getElementById('ref-category').value = data.category;
+            document.getElementById('ref-desc').value = data.description;
+            document.getElementById('is-client-logo').checked = data.is_client_logo || false;
+            
+            modal.classList.add('show');
+        } catch (error) {
+            alert('Hata: ' + error.message);
+        }
+    };
 
     // Run auth check on load
     checkAuth();
@@ -109,28 +151,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const coverFile = document.getElementById('ref-cover').files[0];
         const galleryFiles = document.getElementById('ref-gallery').files;
 
-        if (!coverFile) return alert('Kapak resmi zorunludur!');
-
         overlay.classList.remove('hidden');
         
         try {
-            // 1. Upload Cover Image
-            statusText.innerText = 'Kapak resmi yükleniyor...';
-            const coverPath = `covers/${generateFileName(coverFile)}`;
-            const { data: coverData, error: coverError } = await supabase.storage
-                .from('portfolio-images')
-                .upload(coverPath, coverFile);
-            
-            if (coverError) throw coverError;
-            
-            const { data: { publicUrl: coverUrl } } = supabase.storage
-                .from('portfolio-images')
-                .getPublicUrl(coverPath);
+            let coverUrl = null;
+            let galleryUrls = null;
 
-            // 2. Upload Gallery Images
-            let galleryUrls = [];
+            // 1. Upload Cover Image (Optional if editing)
+            if (coverFile) {
+                statusText.innerText = 'Kapak resmi yükleniyor...';
+                const coverPath = `covers/${generateFileName(coverFile)}`;
+                const { error: coverError } = await supabase.storage
+                    .from('portfolio-images')
+                    .upload(coverPath, coverFile);
+                
+                if (coverError) throw coverError;
+                
+                const { data: { publicUrl } } = supabase.storage
+                    .from('portfolio-images')
+                    .getPublicUrl(coverPath);
+                coverUrl = publicUrl;
+            }
+
+            // 2. Upload Gallery Images (Optional if editing)
             if (galleryFiles.length > 0) {
                 statusText.innerText = 'Detay resimleri yükleniyor...';
+                galleryUrls = [];
                 for (let i = 0; i < galleryFiles.length; i++) {
                     const file = galleryFiles[i];
                     const path = `gallery/${generateFileName(file)}`;
@@ -147,32 +193,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // 3. Save to Database
-            statusText.innerText = 'Veritabanına kaydediliyor...';
-            const { error: dbError } = await supabase
-                .from('references')
-                .insert([
-                    {
-                        title,
-                        category,
-                        description,
-                        cover_image_url: coverUrl,
-                        gallery_urls: galleryUrls,
-                        is_client_logo: isClientLogo
-                    }
-                ]);
+            // 3. Save/Update in Database
+            statusText.innerText = 'Veriler kaydediliyor...';
+            
+            const updateData = {
+                title,
+                category,
+                description,
+                is_client_logo: isClientLogo
+            };
 
-            if (dbError) throw dbError;
+            if (coverUrl) updateData.cover_image_url = coverUrl;
+            if (galleryUrls) updateData.gallery_urls = galleryUrls;
+
+            if (editingId) {
+                const { error: dbError } = await supabase
+                    .from('references')
+                    .update(updateData)
+                    .eq('id', editingId);
+                if (dbError) throw dbError;
+            } else {
+                if (!coverUrl) throw new Error('Yeni kayıt için kapak resmi zorunludur!');
+                const { error: dbError } = await supabase
+                    .from('references')
+                    .insert([{ ...updateData, gallery_urls: galleryUrls || [] }]);
+                if (dbError) throw dbError;
+            }
 
             // Success
-            form.reset();
-            modal.classList.remove('show');
+            overlay.classList.add('hidden');
+            closeModal();
             loadReferences();
 
         } catch (error) {
-            console.error('Yükleme hatası:', error);
-            alert(`Bir hata oluştu: ${error.message}`);
-        } finally {
+            console.error('Hata:', error);
+            alert('Hata oluştu: ' + error.message);
             overlay.classList.add('hidden');
         }
     });
