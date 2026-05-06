@@ -123,6 +123,7 @@ body {
     width: 100%;
     z-index: 1001;
     font-size: 0.78rem;
+    line-height: 1.1;
 }
 
 .top-bar-inner {
