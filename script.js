@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(logo) {
         logo.addEventListener('dblclick', (e) => {
             e.preventDefault();
-            window.location.href = 'admin.html';
+            window.location.href = 'admin/admin.html';
         });
     }
 
