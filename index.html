@@ -20,7 +20,7 @@
     <!-- Navbar -->
     <header class="header">
         <div class="container navbar">
-            <a href="#" class="logo">
+            <a href="#" class="logo" id="nav-logo">
                 <img src="logolar/logo.png" alt="KRT Reklam Bilişim" class="nav-logo-img">
             </a>
             
@@ -35,6 +35,7 @@
                     <li><a href="#hizmetler" class="nav-link">Hizmetlerimiz</a></li>
                     <li><a href="#referanslar" class="nav-link">Referanslar</a></li>
                     <li><a href="#iletisim" class="nav-link">İletişim</a></li>
+                    <li class="admin-mobile-link" style="display: none;"><a href="admin.html" class="nav-link text-orange">Yönetici</a></li>
                 </ul>
                 <a href="tel:+905431265878" class="btn btn-primary nav-cta">
                     <i class="fas fa-phone-alt"></i> Bize Ulaşın
@@ -50,7 +51,7 @@
             <div class="container hero-container">
                 <div class="hero-content">
                     <span class="badge">Sakarya'nın Lider Reklam Ajansı</span>
-                    <h1 class="hero-title">Markanızı Geleceğe Taşıyan <span class="text-gradient">Kreatif Reklam</span> Tasarımı</h1>
+                    <h1 class="hero-title">Markanızı <span style="white-space: nowrap;">Geleceğe Taşıyan</span> <span class="text-gradient">Kreatif Reklam</span> Tasarımı</h1>
                     <p class="hero-desc">Tabela, totem, araç kaplama, web tasarım ve dijital pazarlama alanlarında 20 yılı aşkın tecrübeyle markanızın etkileşimini zirveye taşıyoruz.</p>
                     <div class="hero-actions">
                         <a href="#hizmetler" class="btn btn-primary btn-lg">Hizmetleri İncele <i class="fas fa-arrow-right"></i></a>
@@ -174,47 +175,8 @@
                     <p class="section-desc">Bizimle çalışan ve markasını bir adım öteye taşıyan değerli müşterilerimizden bazıları ve tamamladığımız projeler.</p>
                 </div>
 
-                <div class="portfolio-grid">
-                    <!-- Project 1 -->
-                    <div class="portfolio-item">
-                        <div class="portfolio-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1559400615-586b510edb89?q=80&w=600&auto=format&fit=crop" alt="Totem Tabela Projesi" class="portfolio-img">
-                            <div class="portfolio-overlay">
-                                <span class="portfolio-category">Totem Tabela</span>
-                                <h3 class="portfolio-title">Akaryakıt İstasyonu Totemi</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 2 -->
-                    <div class="portfolio-item">
-                        <div class="portfolio-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1596704017254-9b121068fb31?q=80&w=600&auto=format&fit=crop" alt="Araç Kaplama Projesi" class="portfolio-img">
-                            <div class="portfolio-overlay">
-                                <span class="portfolio-category">Araç Kaplama</span>
-                                <h3 class="portfolio-title">Filo Araç Giydirme</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 3 -->
-                    <div class="portfolio-item">
-                        <div class="portfolio-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop" alt="Kutu Harf Tabela" class="portfolio-img">
-                            <div class="portfolio-overlay">
-                                <span class="portfolio-category">Kutu Harf</span>
-                                <h3 class="portfolio-title">Plaza Işıklı Tabela</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 4 -->
-                    <div class="portfolio-item">
-                        <div class="portfolio-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop" alt="Web Tasarım Projesi" class="portfolio-img">
-                            <div class="portfolio-overlay">
-                                <span class="portfolio-category">Web Tasarım</span>
-                                <h3 class="portfolio-title">E-Ticaret Sitesi Arayüzü</h3>
-                            </div>
-                        </div>
-                    </div>
+                <div class="portfolio-grid" id="portfolio-grid">
+                    <div class="loading-text text-center w-100 py-5">Referanslar yükleniyor...</div>
                 </div>
 
                 <!-- Client Logos Slider (Static for now, easily made slider with JS) -->
@@ -341,6 +303,8 @@
             });
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabaseClient.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRT Reklam - Yönetim Paneli</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+    <header class="admin-header glass-card">
+        <div class="container admin-nav">
+            <a href="index.html" class="logo">
+                <img src="logolar/logo.png" alt="KRT Reklam Bilişim" class="nav-logo-img">
+                <span class="admin-badge">Yönetim Paneli</span>
+            </a>
+            <a href="index.html" class="btn btn-outline btn-sm"><i class="fas fa-home"></i> Siteye Dön</a>
+        </div>
+    </header>
+
+    <main class="admin-main container">
+        <div class="admin-layout">
+            <!-- Sidebar -->
+            <aside class="admin-sidebar glass-card">
+                <ul class="admin-menu">
+                    <li><a href="#" class="active"><i class="fas fa-images"></i> Referanslar</a></li>
+                    <!-- Future admin items can go here -->
+                </ul>
+            </aside>
+
+            <!-- Content Area -->
+            <section class="admin-content glass-card">
+                <div class="content-header">
+                    <h2>Referans Yönetimi</h2>
+                    <button id="add-reference-btn" class="btn btn-primary"><i class="fas fa-plus"></i> Yeni Ekle</button>
+                </div>
+
+                <div class="references-list" id="references-list">
+                    <!-- References will be loaded here dynamically -->
+                    <div class="loading-text">Referanslar yükleniyor...</div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Add Reference Modal -->
+    <div id="add-modal" class="modal">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h3>Yeni Referans Ekle</h3>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="add-reference-form">
+                <div class="form-group">
+                    <label>Proje Başlığı</label>
+                    <input type="text" id="ref-title" required placeholder="Örn: Akaryakıt İstasyonu Totemi">
+                </div>
+                
+                <div class="form-group">
+                    <label>Kategori</label>
+                    <select id="ref-category" required>
+                        <option value="">Seçiniz...</option>
+                        <option value="Totem Tabela">Totem Tabela</option>
+                        <option value="Araç Kaplama">Araç Kaplama</option>
+                        <option value="Kutu Harf">Kutu Harf</option>
+                        <option value="Web Tasarım">Web Tasarım</option>
+                        <option value="Cephe Giydirme">Cephe Giydirme</option>
+                        <option value="Diğer">Diğer</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Kapak Resmi</label>
+                    <input type="file" id="ref-cover" accept="image/*" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Proje Açıklaması</label>
+                    <textarea id="ref-desc" rows="4" required placeholder="Yapılan çalışma hakkında kısa bir açıklama..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Detay Resimleri (Çoklu Seçim)</label>
+                    <input type="file" id="ref-gallery" accept="image/*" multiple>
+                    <small class="text-muted">Projenin detay resimlerini seçebilirsiniz.</small>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline cancel-btn">İptal</button>
+                    <button type="submit" class="btn btn-primary" id="save-btn"><i class="fas fa-save"></i> Kaydet</button>
+                </div>
+            </form>
+            
+            <!-- Loading Overlay -->
+            <div class="loading-overlay hidden" id="upload-overlay">
+                <div class="spinner"></div>
+                <p id="upload-status">Yükleniyor, lütfen bekleyin...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="supabaseClient.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
