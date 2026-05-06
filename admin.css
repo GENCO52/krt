@@ -180,6 +180,11 @@
     box-shadow: 0 0 0 2px rgba(255,107,0,0.2);
 }
 
+.form-group select option {
+    background-color: var(--bg-card);
+    color: var(--text-main);
+}
+
 .form-group input[type="file"] {
     display: block;
     width: 100%;
