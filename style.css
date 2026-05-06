@@ -113,10 +113,58 @@ body {
     border-radius: var(--radius-md);
 }
 
+/* Top Bar */
+.top-bar {
+    background: #c45a00;
+    padding: 7px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1001;
+    font-size: 0.78rem;
+}
+
+.top-bar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.85);
+}
+
+.top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.top-bar-link {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: opacity 0.2s;
+}
+
+.top-bar-link:hover {
+    opacity: 0.8;
+}
+
+.top-bar-divider {
+    color: rgba(255,255,255,0.4);
+}
+
 /* Header & Navbar */
 .header {
     position: fixed;
-    top: 0;
+    top: 36px;
     left: 0;
     width: 100%;
     z-index: 1000;
@@ -220,7 +268,7 @@ body {
 /* Hero Section */
 .hero {
     position: relative;
-    padding: 160px 0 100px;
+    padding: 196px 0 100px;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -1103,6 +1151,9 @@ section {
 }
 
 @media (max-width: 768px) {
+    .top-bar { display: none; }
+    .header { top: 0; }
+    .hero { padding-top: 160px; }
     .nav-menu {
         position: fixed;
         top: 70px;
