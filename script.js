@@ -141,12 +141,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Populate and clone for infinite loop
             const populate = () => {
                 logoTrack.innerHTML = '';
-                // Add original items
-                data.forEach(logo => {
-                    logoTrack.appendChild(createLogoItem(logo));
-                });
-                // Clone items multiple times to ensure the track is full enough for the animation
-                for(let i=0; i<3; i++) {
+                // Add items twice for seamless loop with -50% translateX
+                for(let i=0; i<2; i++) {
                     data.forEach(logo => {
                         logoTrack.appendChild(createLogoItem(logo));
                     });
