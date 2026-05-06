@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.style.cursor = 'pointer';
                 item.innerHTML = `
                     <div class="portfolio-img-wrap">
-                        <img src="${ref.cover_image_url}" alt="${ref.title}" class="portfolio-img">
+                        <img src="${ref.cover_image_url}" alt="${ref.title}" class="portfolio-img" loading="lazy">
                         <div class="portfolio-overlay">
                             <span class="portfolio-category">${ref.category}</span>
                             <h3 class="portfolio-title">${ref.title}</h3>
@@ -161,7 +161,16 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let i = 0; i < total; i++) {
                 const btn = document.createElement('button');
                 btn.className = 'portfolio-dot' + (i === 0 ? ' active' : '');
-                btn.addEventListener('click', () => { currentPage = i; renderPage(); });
+                btn.setAttribute('aria-label', `Sayfa ${i + 1}`);
+                btn.setAttribute('aria-current', i === 0 ? 'page' : 'false');
+                btn.addEventListener('click', () => {
+                    currentPage = i;
+                    renderPage();
+                    // Update aria-current for accessibility
+                    document.querySelectorAll('.portfolio-dot').forEach((d, idx) => {
+                        d.setAttribute('aria-current', idx === i ? 'page' : 'false');
+                    });
+                });
                 dotsEl.appendChild(btn);
             }
         }
@@ -182,12 +191,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const filterBar = document.getElementById('filter-bar');
             if (!filterBar) return;
 
+            // Add aria-labels to filter buttons
+            const filterBtns = filterBar.querySelectorAll('.filter-btn');
+            filterBtns.forEach((btn) => {
+                const cat = btn.dataset.cat;
+                btn.setAttribute('aria-label', `${cat} kategorisine göre filtrele`);
+            });
+
             filterBar.addEventListener('click', (e) => {
                 const btn = e.target.closest('.filter-btn');
                 if (!btn) return;
 
-                filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                filterBar.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-pressed', 'false');
+                });
                 btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
 
                 const cat = btn.dataset.cat;
                 const filtered = cat === 'Tümü' ? allRefs : allRefs.filter(r => r.category === cat);
@@ -222,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const createLogoItem = (logo) => {
                 const div = document.createElement('div');
                 div.className = 'client-logo-item';
-                div.innerHTML = `<img src="${logo.cover_image_url}" alt="${logo.title}" title="${logo.title}">`;
+                div.innerHTML = `<img src="${logo.cover_image_url}" alt="${logo.title}" title="${logo.title}" loading="lazy">`;
                 return div;
             };
 
@@ -283,12 +303,22 @@ document.addEventListener('DOMContentLoaded', () => {
         allImages.forEach((url, index) => {
             const thumb = document.createElement('div');
             thumb.className = `thumbnail-item ${index === 0 ? 'active' : ''}`;
-            thumb.innerHTML = `<img src="${url}" alt="${project.title}">`;
-            
+            thumb.setAttribute('role', 'button');
+            thumb.setAttribute('tabindex', '0');
+            thumb.setAttribute('aria-label', `Resim ${index + 1}`);
+            thumb.innerHTML = `<img src="${url}" alt="${project.title}" loading="lazy">`;
+
             thumb.addEventListener('click', () => {
                 updateGalleryView(index);
             });
-            
+
+            thumb.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    updateGalleryView(index);
+                }
+            });
+
             thumbnailsGrid.appendChild(thumb);
         });
 

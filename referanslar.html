@@ -58,7 +58,7 @@
                 <img src="logolar/logo.png" alt="KRT Reklam Bilişim" class="nav-logo-img">
             </a>
 
-            <button class="mobile-menu-btn" aria-label="Menüyü Aç">
+            <button class="mobile-menu-btn" aria-label="Menüyü aç veya kapat">
                 <i class="fas fa-bars"></i>
             </button>
 
@@ -90,13 +90,13 @@
         <section class="ref-page-content">
             <div class="container">
                 <div class="filter-bar" id="filter-bar">
-                    <button class="filter-btn active" data-cat="Tümü">Tümü</button>
-                    <button class="filter-btn" data-cat="Totem Tabela">Totem Tabela</button>
-                    <button class="filter-btn" data-cat="Araç Kaplama">Araç Kaplama</button>
-                    <button class="filter-btn" data-cat="Kutu Harf">Kutu Harf</button>
-                    <button class="filter-btn" data-cat="Web Tasarım">Web Tasarım</button>
-                    <button class="filter-btn" data-cat="Cephe Giydirme">Cephe Giydirme</button>
-                    <button class="filter-btn" data-cat="Diğer">Diğer</button>
+                    <button class="filter-btn active" data-cat="Tümü" aria-label="Tümü kategorisine göre filtrele" aria-pressed="true">Tümü</button>
+                    <button class="filter-btn" data-cat="Totem Tabela" aria-label="Totem Tabela kategorisine göre filtrele" aria-pressed="false">Totem Tabela</button>
+                    <button class="filter-btn" data-cat="Araç Kaplama" aria-label="Araç Kaplama kategorisine göre filtrele" aria-pressed="false">Araç Kaplama</button>
+                    <button class="filter-btn" data-cat="Kutu Harf" aria-label="Kutu Harf kategorisine göre filtrele" aria-pressed="false">Kutu Harf</button>
+                    <button class="filter-btn" data-cat="Web Tasarım" aria-label="Web Tasarım kategorisine göre filtrele" aria-pressed="false">Web Tasarım</button>
+                    <button class="filter-btn" data-cat="Cephe Giydirme" aria-label="Cephe Giydirme kategorisine göre filtrele" aria-pressed="false">Cephe Giydirme</button>
+                    <button class="filter-btn" data-cat="Diğer" aria-label="Diğer kategorisine göre filtrele" aria-pressed="false">Diğer</button>
                 </div>
                 <div class="portfolio-grid full-grid" id="portfolio-grid">
                     <div class="loading-text text-center w-100 py-5">Referanslar yükleniyor...</div>
@@ -164,7 +164,7 @@
     <!-- Project Detail Modal -->
     <div id="project-modal" class="project-modal">
         <div class="project-modal-content glass-card">
-            <button class="close-project-modal"><i class="fas fa-times"></i></button>
+            <button class="close-project-modal" aria-label="Modalı kapat"><i class="fas fa-times"></i></button>
             <div class="project-modal-body">
                 <div class="project-modal-gallery">
                     <div class="main-image-container" id="main-image-container"></div>
