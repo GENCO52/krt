@@ -114,7 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function openProjectDetail(project) {
-        const gallery = document.getElementById('project-gallery');
+        const mainImageContainer = document.getElementById('main-image-container');
+        const thumbnailsGrid = document.getElementById('thumbnails-grid');
         const title = document.getElementById('project-title');
         const category = document.getElementById('project-category');
         const description = document.getElementById('project-description');
@@ -123,16 +124,34 @@ document.addEventListener('DOMContentLoaded', () => {
         category.innerText = project.category;
         description.innerText = project.description;
 
-        // Load Gallery
-        gallery.innerHTML = `<img src="${project.cover_image_url}" alt="${project.title}">`;
-        if (project.gallery_urls && project.gallery_urls.length > 0) {
-            project.gallery_urls.forEach(url => {
-                gallery.innerHTML += `<img src="${url}" alt="${project.title}">`;
+        // Populate Images
+        const allImages = [project.cover_image_url, ...(project.gallery_urls || [])];
+        
+        // Set Initial Main Image
+        mainImageContainer.innerHTML = `<img src="${allImages[0]}" alt="${project.title}" id="modal-main-img">`;
+        
+        // Populate Thumbnails
+        thumbnailsGrid.innerHTML = '';
+        allImages.forEach((url, index) => {
+            const thumb = document.createElement('div');
+            thumb.className = `thumbnail-item ${index === 0 ? 'active' : ''}`;
+            thumb.innerHTML = `<img src="${url}" alt="${project.title}">`;
+            
+            thumb.addEventListener('click', () => {
+                // Update Main Image
+                document.getElementById('modal-main-img').src = url;
+                
+                // Update Active State
+                document.querySelectorAll('.thumbnail-item').forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
             });
-        }
+            
+            thumbnailsGrid.appendChild(thumb);
+        });
 
         projectModal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
 });
+
 
