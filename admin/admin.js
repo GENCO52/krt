@@ -47,15 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let editingId = null;
 
-    // Modal Events
-    addBtn.addEventListener('click', () => {
-        editingId = null;
-        form.reset();
-        document.getElementById('modal-title').innerText = 'Yeni Referans Ekle';
-        document.getElementById('save-btn').innerHTML = '<i class="fas fa-save"></i> Kaydet';
-        modal.classList.add('show');
-    });
-
     const closeModal = () => {
         modal.classList.remove('show');
         form.reset();

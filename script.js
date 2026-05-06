@@ -38,6 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Hero Accordion
+    const accItems = document.querySelectorAll('.hero-acc-item');
+    accItems.forEach(item => {
+        item.addEventListener('click', () => {
+            accItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+        });
+    });
+
     // Logo Double Click
     const logo = document.getElementById('nav-logo');
     if(logo) {
@@ -77,6 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadPublicReferences() {
+        const isSlider = !!document.getElementById('portfolio-prev');
+        const ITEMS_PER_PAGE = 3;
+        let currentPage = 0;
+        let allRefs = [];
+
         try {
             const { data, error } = await supabase
                 .from('references')
@@ -84,14 +98,44 @@ document.addEventListener('DOMContentLoaded', () => {
                 .order('created_at', { ascending: false });
 
             if (error) throw error;
+            allRefs = data || [];
 
-            if (data.length === 0) {
+            if (allRefs.length === 0) {
                 portfolioGrid.innerHTML = '<div class="w-100 text-center py-5">Henüz referans eklenmemiş.</div>';
                 return;
             }
 
+            if (isSlider) {
+                portfolioGrid.classList.remove('full-grid');
+                buildDots();
+                renderPage();
+
+                document.getElementById('portfolio-prev').addEventListener('click', () => {
+                    if (currentPage > 0) { currentPage--; renderPage(); }
+                });
+                document.getElementById('portfolio-next').addEventListener('click', () => {
+                    if ((currentPage + 1) * ITEMS_PER_PAGE < allRefs.length) { currentPage++; renderPage(); }
+                });
+            } else {
+                portfolioGrid.classList.add('full-grid');
+                renderItems(allRefs);
+                setupFilters();
+            }
+        } catch (error) {
+            console.error('Referanslar yüklenemedi:', error);
+            portfolioGrid.innerHTML = '<div class="w-100 text-center py-5 text-orange">Referanslar yüklenirken bir hata oluştu.</div>';
+        }
+
+        function renderPage() {
+            const start = currentPage * ITEMS_PER_PAGE;
+            renderItems(allRefs.slice(start, start + ITEMS_PER_PAGE));
+            updateDots();
+            updateNavBtns();
+        }
+
+        function renderItems(refs) {
             portfolioGrid.innerHTML = '';
-            data.forEach(ref => {
+            refs.forEach(ref => {
                 const item = document.createElement('div');
                 item.className = 'portfolio-item';
                 item.style.cursor = 'pointer';
@@ -104,13 +148,56 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 `;
-                
                 item.addEventListener('click', () => openProjectDetail(ref));
                 portfolioGrid.appendChild(item);
             });
-        } catch (error) {
-            console.error('Referanslar yüklenemedi:', error);
-            portfolioGrid.innerHTML = '<div class="w-100 text-center py-5 text-orange">Referanslar yüklenirken bir hata oluştu.</div>';
+        }
+
+        function buildDots() {
+            const dotsEl = document.getElementById('portfolio-dots');
+            if (!dotsEl) return;
+            const total = Math.ceil(allRefs.length / ITEMS_PER_PAGE);
+            dotsEl.innerHTML = '';
+            for (let i = 0; i < total; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'portfolio-dot' + (i === 0 ? ' active' : '');
+                btn.addEventListener('click', () => { currentPage = i; renderPage(); });
+                dotsEl.appendChild(btn);
+            }
+        }
+
+        function updateDots() {
+            document.querySelectorAll('.portfolio-dot').forEach((d, i) =>
+                d.classList.toggle('active', i === currentPage));
+        }
+
+        function updateNavBtns() {
+            const prev = document.getElementById('portfolio-prev');
+            const next = document.getElementById('portfolio-next');
+            if (prev) prev.disabled = currentPage === 0;
+            if (next) next.disabled = (currentPage + 1) * ITEMS_PER_PAGE >= allRefs.length;
+        }
+
+        function setupFilters() {
+            const filterBar = document.getElementById('filter-bar');
+            if (!filterBar) return;
+
+            filterBar.addEventListener('click', (e) => {
+                const btn = e.target.closest('.filter-btn');
+                if (!btn) return;
+
+                filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const cat = btn.dataset.cat;
+                const filtered = cat === 'Tümü' ? allRefs : allRefs.filter(r => r.category === cat);
+
+                if (filtered.length === 0) {
+                    portfolioGrid.innerHTML = '<div class="w-100 text-center py-5" style="color:var(--text-muted)">Bu kategoride henüz proje yok.</div>';
+                } else {
+                    renderItems(filtered);
+                }
+            });
         }
     }
 
@@ -134,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Function to create logo item
             const createLogoItem = (logo) => {
                 const div = document.createElement('div');
-                div.className = 'client-logo-item glass-card';
+                div.className = 'client-logo-item';
                 div.innerHTML = `<img src="${logo.cover_image_url}" alt="${logo.title}" title="${logo.title}">`;
                 return div;
             };
