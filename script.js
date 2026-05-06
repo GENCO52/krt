@@ -126,7 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (error) throw error;
             if (!data || data.length === 0) {
-                document.querySelector('.clients-wrapper').style.display = 'none';
+                const section = document.querySelector('.clients-section');
+                if (section) section.style.display = 'none';
                 return;
             }
 
@@ -141,8 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Populate and clone for infinite loop
             const populate = () => {
                 logoTrack.innerHTML = '';
-                // Add items twice for seamless loop with -50% translateX
-                for(let i=0; i<2; i++) {
+                // Clone items multiple times to ensure the track is always longer than the screen
+                // 6 times is usually enough to cover even large screens with few logos
+                for(let i=0; i<6; i++) {
                     data.forEach(logo => {
                         logoTrack.appendChild(createLogoItem(logo));
                     });
