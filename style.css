@@ -50,6 +50,21 @@ body {
 
 /* Utilities */
 .text-orange { color: var(--orange-primary); }
+
+/* Focus states for accessibility */
+:focus-visible {
+    outline: 2px solid var(--orange-primary);
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--orange-primary);
+    outline-offset: 2px;
+}
 .text-gradient {
     background: linear-gradient(135deg, #ff6b00 0%, #ff9e00 100%);
     -webkit-background-clip: text;
@@ -264,6 +279,11 @@ body {
     color: var(--text-main);
     font-size: 1.5rem;
     cursor: pointer;
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Hero Section */
@@ -794,7 +814,8 @@ section {
 }
 
 .filter-btn {
-    padding: 8px 18px;
+    min-height: 44px;
+    padding: 10px 20px;
     border-radius: 50px;
     border: 1px solid var(--border-color);
     background: var(--bg-card);
@@ -804,6 +825,9 @@ section {
     font-weight: 500;
     cursor: pointer;
     transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .filter-btn:hover {
@@ -1223,8 +1247,10 @@ section {
     background: rgba(0,0,0,0.5);
     border: none;
     color: white;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1326,5 +1352,318 @@ section {
 .project-modal-footer {
     border-top: 1px solid var(--border-color);
     padding-top: 30px;
+}
+
+/* Mobile Optimization: Small screens (576px and below) */
+@media (max-width: 576px) {
+    /* Container and spacing */
+    .container {
+        padding: 0 16px;
+    }
+
+    section {
+        padding: 60px 0;
+    }
+
+    /* Hero Section */
+    .hero {
+        padding: 120px 0 60px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+        margin-bottom: 16px;
+    }
+
+    .hero-desc {
+        font-size: 1rem;
+        margin-bottom: 24px;
+    }
+
+    .hero-actions {
+        gap: 12px;
+    }
+
+    .btn-lg {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+
+    /* Section Headers */
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .section-header {
+        margin-bottom: 40px;
+    }
+
+    /* Touch-friendly Interactive Elements */
+    .mobile-menu-btn {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-link {
+        padding: 8px 12px;
+    }
+
+    .filter-btn {
+        min-height: 44px;
+        padding: 12px 16px;
+    }
+
+    .close-project-modal {
+        width: 44px;
+        height: 44px;
+        top: 16px;
+        right: 16px;
+    }
+
+    /* Header */
+    .header {
+        padding: 10px 0;
+    }
+
+    .header.scrolled {
+        padding: 8px 0;
+    }
+
+    .nav-menu {
+        gap: 20px;
+    }
+
+    .nav-list {
+        gap: 20px;
+        font-size: 1rem;
+    }
+
+    .nav-cta {
+        margin-top: 16px;
+        width: 100%;
+    }
+
+    /* Services Grid */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .service-card {
+        min-height: auto;
+    }
+
+    /* Portfolio Grid */
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    /* Modal */
+    .project-modal-content {
+        max-height: 95vh;
+        width: 95%;
+    }
+
+    .project-modal-info {
+        padding: 24px;
+    }
+
+    .project-modal-title {
+        font-size: 1.5rem;
+        margin-bottom: 16px;
+    }
+
+    .project-modal-desc {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+    }
+
+    /* Thumbnails */
+    .thumbnails-grid {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+        gap: 8px;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp-float {
+        bottom: 15px;
+        right: 15px;
+        width: 48px;
+        height: 48px;
+    }
+
+    /* Footer */
+    .footer-bottom {
+        padding: 20px 0;
+    }
+
+    .social-links {
+        gap: 12px;
+    }
+
+    .social-links a {
+        width: 36px;
+        height: 36px;
+    }
+
+    /* Process Section */
+    .step {
+        margin-bottom: 20px;
+    }
+
+    .step-number {
+        font-size: 2rem;
+    }
+
+    /* CTA Section */
+    .cta-title {
+        font-size: 1.8rem;
+    }
+
+    .cta-desc {
+        font-size: 0.95rem;
+    }
+
+    /* Portfolio Slider */
+    .portfolio-nav-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .portfolio-slider-footer {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .portfolio-dots {
+        margin: 0 auto;
+    }
+}
+
+/* Ultra-mobile: Very small screens (480px and below) */
+@media (max-width: 480px) {
+    /* Container */
+    .container {
+        padding: 0 12px;
+    }
+
+    section {
+        padding: 50px 0;
+    }
+
+    /* Hero */
+    .hero {
+        padding: 100px 0 50px;
+    }
+
+    .hero-title {
+        font-size: 1.75rem;
+        letter-spacing: -0.5px;
+    }
+
+    .hero-desc {
+        font-size: 0.95rem;
+        max-width: 100%;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+    }
+
+    /* Section */
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+    }
+
+    .section-header {
+        margin-bottom: 30px;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 10px 18px;
+        font-size: 0.85rem;
+        gap: 6px;
+    }
+
+    .btn-lg {
+        padding: 11px 18px;
+        font-size: 0.85rem;
+    }
+
+    .btn-sm {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+    }
+
+    /* Modal - Full screen on ultra-mobile */
+    .project-modal-content {
+        max-height: 100vh;
+        max-width: 100%;
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .close-project-modal {
+        width: 40px;
+        height: 40px;
+        top: 12px;
+        right: 12px;
+    }
+
+    .project-modal-body {
+        min-height: auto;
+    }
+
+    .project-modal-info {
+        padding: 16px;
+    }
+
+    .project-modal-title {
+        font-size: 1.3rem;
+    }
+
+    .project-modal-desc {
+        font-size: 0.9rem;
+    }
+
+    /* Footer */
+    .footer-logo-img {
+        height: 40px;
+    }
+
+    .footer-title {
+        font-size: 1rem;
+    }
+
+    .footer-links a {
+        font-size: 0.9rem;
+    }
+
+    .footer-desc {
+        font-size: 0.9rem;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp-float {
+        width: 44px;
+        height: 44px;
+        bottom: 12px;
+        right: 12px;
+        font-size: 1.2rem;
+    }
+
+    .whatsapp-tooltip {
+        font-size: 0.75rem;
+    }
 }
 
