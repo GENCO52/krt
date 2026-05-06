@@ -125,11 +125,42 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('ref-desc').value = data.description;
             document.getElementById('is-client-logo').checked = data.is_client_logo || false;
             
+            // Show Previews
+            const coverPreview = document.getElementById('current-cover-preview');
+            const galleryPreview = document.getElementById('current-gallery-preview');
+            const coverImg = document.getElementById('current-cover-img');
+            const galleryImages = document.getElementById('current-gallery-images');
+
+            if (data.cover_image_url) {
+                coverImg.src = data.cover_image_url;
+                coverPreview.classList.remove('hidden');
+            } else {
+                coverPreview.classList.add('hidden');
+            }
+
+            if (data.gallery_urls && data.gallery_urls.length > 0) {
+                galleryImages.innerHTML = data.gallery_urls.map(url => `<img src="${url}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">`).join('');
+                galleryPreview.classList.remove('hidden');
+            } else {
+                galleryPreview.classList.add('hidden');
+            }
+            
             modal.classList.add('show');
         } catch (error) {
             alert('Hata: ' + error.message);
         }
     };
+
+    // Open Add Modal
+    addBtn.addEventListener('click', () => {
+        editingId = null;
+        form.reset();
+        document.getElementById('modal-title').innerText = 'Yeni Referans Ekle';
+        document.getElementById('save-btn').innerHTML = '<i class="fas fa-save"></i> Kaydet';
+        document.getElementById('current-cover-preview').classList.add('hidden');
+        document.getElementById('current-gallery-preview').classList.add('hidden');
+        modal.classList.add('show');
+    });
 
     // Run auth check on load
     checkAuth();
