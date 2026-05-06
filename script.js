@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
             portfolioGrid.innerHTML = '<div class="w-100 text-center py-5">Referansları görmek için Supabase ayarlarını yapınız.</div>';
         } else {
             loadPublicReferences();
+            loadClientLogos(); // Load logos for the slider
         }
     }
 
@@ -110,6 +111,52 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Referanslar yüklenemedi:', error);
             portfolioGrid.innerHTML = '<div class="w-100 text-center py-5 text-orange">Referanslar yüklenirken bir hata oluştu.</div>';
+        }
+    }
+
+    async function loadClientLogos() {
+        const logoTrack = document.getElementById('logo-track');
+        if (!logoTrack) return;
+
+        try {
+            const { data, error } = await supabase
+                .from('references')
+                .select('cover_image_url, title')
+                .eq('is_client_logo', true);
+
+            if (error) throw error;
+            if (!data || data.length === 0) {
+                document.querySelector('.clients-wrapper').style.display = 'none';
+                return;
+            }
+
+            // Function to create logo item
+            const createLogoItem = (logo) => {
+                const div = document.createElement('div');
+                div.className = 'client-logo-item glass-card';
+                div.innerHTML = `<img src="${logo.cover_image_url}" alt="${logo.title}" title="${logo.title}">`;
+                return div;
+            };
+
+            // Populate and clone for infinite loop
+            const populate = () => {
+                logoTrack.innerHTML = '';
+                // Add original items
+                data.forEach(logo => {
+                    logoTrack.appendChild(createLogoItem(logo));
+                });
+                // Clone items multiple times to ensure the track is full enough for the animation
+                for(let i=0; i<3; i++) {
+                    data.forEach(logo => {
+                        logoTrack.appendChild(createLogoItem(logo));
+                    });
+                }
+            };
+
+            populate();
+
+        } catch (error) {
+            console.error('Logolar yüklenemedi:', error);
         }
     }
 

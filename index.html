@@ -179,24 +179,12 @@
                     <div class="loading-text text-center w-100 py-5">Referanslar yükleniyor...</div>
                 </div>
 
-                <!-- Client Logos Slider (Static for now, easily made slider with JS) -->
+                <!-- Client Logos Slider (Dynamic from Supabase) -->
                 <div class="clients-wrapper">
-                    <h3 class="text-center text-sm mb-4" style="color: var(--gray-400)">Bize Güvenen Firmalar</h3>
-                    <div class="clients-grid">
-                        <div class="client-logo glass-card">
-                            <span>LOGO 1</span>
-                        </div>
-                        <div class="client-logo glass-card">
-                            <span>LOGO 2</span>
-                        </div>
-                        <div class="client-logo glass-card">
-                            <span>LOGO 3</span>
-                        </div>
-                        <div class="client-logo glass-card">
-                            <span>LOGO 4</span>
-                        </div>
-                        <div class="client-logo glass-card">
-                            <span>LOGO 5</span>
+                    <h3 class="text-center text-sm mb-4" style="color: var(--text-muted)">Bize Güvenen Firmalar</h3>
+                    <div class="logo-slider">
+                        <div class="logo-track" id="logo-track">
+                            <!-- Logos will be cloned here for infinite effect -->
                         </div>
                     </div>
                 </div>

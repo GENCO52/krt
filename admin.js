@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.innerHTML = `
                     <img src="${ref.cover_image_url}" alt="${ref.title}" class="admin-ref-img">
                     <div class="admin-ref-info">
-                        <div class="admin-ref-title">${ref.title}</div>
+                        <div class="admin-ref-title">${ref.title} ${ref.is_client_logo ? '<span class="client-badge"><i class="fas fa-check-circle"></i> Firma Slider</span>' : ''}</div>
                         <div class="admin-ref-cat">${ref.category}</div>
                     </div>
                     <div class="admin-ref-actions">
@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const title = document.getElementById('ref-title').value;
         const category = document.getElementById('ref-category').value;
         const description = document.getElementById('ref-desc').value;
+        const isClientLogo = document.getElementById('is-client-logo').checked;
         const coverFile = document.getElementById('ref-cover').files[0];
         const galleryFiles = document.getElementById('ref-gallery').files;
 
@@ -156,7 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         category,
                         description,
                         cover_image_url: coverUrl,
-                        gallery_urls: galleryUrls
+                        gallery_urls: galleryUrls,
+                        is_client_logo: isClientLogo
                     }
                 ]);
 
