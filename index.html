@@ -17,6 +17,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-inner">
+            <div class="top-bar-right" style="margin-left:auto">
+                <a href="mailto:info@krtreklambilisim.com" class="top-bar-link">
+                    <i class="fas fa-envelope"></i> info@krtreklambilisim.com
+                </a>
+                <span class="top-bar-divider">|</span>
+                <a href="tel:+902642811254" class="top-bar-link">
+                    <i class="fas fa-phone-alt"></i> 0264 281 12 54
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <header class="header">
         <div class="container navbar">
@@ -33,7 +48,7 @@
                     <li><a href="#anasayfa" class="nav-link active">Anasayfa</a></li>
                     <li><a href="#kurumsal" class="nav-link">Kurumsal</a></li>
                     <li><a href="#hizmetler" class="nav-link">Hizmetlerimiz</a></li>
-                    <li><a href="#referanslar" class="nav-link">Referanslar</a></li>
+                    <li><a href="referanslar.html" class="nav-link">Referanslar</a></li>
                     <li><a href="#iletisim" class="nav-link">İletişim</a></li>
                     <li class="admin-mobile-link" style="display: none;"><a href="admin/admin.html" class="nav-link text-orange">Yönetici</a></li>
                 </ul>
@@ -58,24 +73,62 @@
                         <a href="https://wa.me/905431265878" target="_blank" class="btn btn-outline btn-lg"><i class="fab fa-whatsapp"></i> Hemen Teklif Al</a>
                     </div>
                 </div>
-                <div class="hero-visual">
-                    <div class="glass-card visual-card">
-                        <div class="visual-content">
-                            <i class="fas fa-rocket fa-3x text-orange"></i>
-                            <div class="visual-stats">
-                                <h3 class="stats-number">20+</h3>
-                                <p class="stats-text">Yıllık Tecrübe</p>
-                            </div>
+                <div class="hero-accordion" id="hero-accordion">
+                    <div class="hero-acc-item active" style="--acc-bg: url('image/kutu-harf.jpg')">
+                        <div class="hero-acc-overlay"></div>
+                        <div class="hero-acc-content">
+                            <h3 class="hero-acc-title">Kutu Harf</h3>
+                            <a href="#hizmetler" class="hero-acc-btn">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
                         </div>
+                        <span class="hero-acc-label">Kutu Harf</span>
                     </div>
-                    <div class="glass-card visual-card floating">
-                        <div class="visual-content">
-                            <i class="fas fa-chart-line fa-3x text-orange"></i>
-                            <div class="visual-stats">
-                                <h3 class="stats-number">%100</h3>
-                                <p class="stats-text">Müşteri Memnuniyeti</p>
-                            </div>
+                    <div class="hero-acc-item" style="--acc-bg: url('image/dijital-baski.jpg')">
+                        <div class="hero-acc-overlay"></div>
+                        <div class="hero-acc-content">
+                            <h3 class="hero-acc-title">Dijital Baskı</h3>
+                            <a href="#hizmetler" class="hero-acc-btn">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
                         </div>
+                        <span class="hero-acc-label">Dijital Baskı</span>
+                    </div>
+                    <div class="hero-acc-item" style="--acc-bg: url('image/totem-imalat.jpg')">
+                        <div class="hero-acc-overlay"></div>
+                        <div class="hero-acc-content">
+                            <h3 class="hero-acc-title">Tabela & Totem İmalatı</h3>
+                            <a href="#hizmetler" class="hero-acc-btn">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <span class="hero-acc-label">Tabela & Totem İmalatı</span>
+                    </div>
+                    <div class="hero-acc-item" style="--acc-bg: url('image/arac-kaplama.jpg')">
+                        <div class="hero-acc-overlay"></div>
+                        <div class="hero-acc-content">
+                            <h3 class="hero-acc-title">Araç Kaplama</h3>
+                            <a href="#hizmetler" class="hero-acc-btn">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <span class="hero-acc-label">Araç Kaplama</span>
+                    </div>
+                    <div class="hero-acc-item" style="--acc-bg: url('image/cephe-giydirme.jpg')">
+                        <div class="hero-acc-overlay"></div>
+                        <div class="hero-acc-content">
+                            <h3 class="hero-acc-title">Cephe Giydirme</h3>
+                            <a href="#hizmetler" class="hero-acc-btn">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <span class="hero-acc-label">Cephe Giydirme</span>
+                    </div>
+                    <div class="hero-acc-item" style="--acc-bg: url('image/web-tasarim.webp')">
+                        <div class="hero-acc-overlay"></div>
+                        <div class="hero-acc-content">
+                            <h3 class="hero-acc-title">Web Tasarım & Yazılım</h3>
+                            <a href="#hizmetler" class="hero-acc-btn">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <span class="hero-acc-label">Web Tasarım & Yazılım</span>
+                    </div>
+                    <div class="hero-acc-item" style="--acc-bg: url('image/seo-ve-google-ads.jpg')">
+                        <div class="hero-acc-overlay"></div>
+                        <div class="hero-acc-content">
+                            <h3 class="hero-acc-title">Dijital Reklam & SEO</h3>
+                            <a href="#hizmetler" class="hero-acc-btn">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <span class="hero-acc-label">Dijital Reklam & SEO</span>
                     </div>
                 </div>
             </div>
@@ -90,6 +143,35 @@
                 </div>
             </div>
         </div>
+
+        <!-- References Section -->
+        <section id="referanslar" class="references">
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle">İş Birliklerimiz</span>
+                    <h2 class="section-title">Güçlü <span class="text-orange">Referanslarımız</span></h2>
+                    <p class="section-desc">Bizimle çalışan ve markasını bir adım öteye taşıyan değerli müşterilerimizden bazıları ve tamamladığımız projeler.</p>
+                </div>
+
+                <div class="portfolio-slider-wrapper">
+                    <button class="portfolio-nav-btn" id="portfolio-prev" aria-label="Önceki">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="portfolio-grid" id="portfolio-grid">
+                        <div class="loading-text text-center w-100 py-5">Referanslar yükleniyor...</div>
+                    </div>
+                    <button class="portfolio-nav-btn" id="portfolio-next" aria-label="Sonraki">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="portfolio-slider-footer">
+                    <div class="portfolio-dots" id="portfolio-dots"></div>
+                    <a href="referanslar.html" class="btn btn-outline btn-sm">Tümünü Gör <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+            </div>
+        </section>
 
         <!-- Services Section -->
         <section id="hizmetler" class="services">
@@ -123,7 +205,7 @@
                         <a href="#" class="service-link">Detaylı Bilgi <i class="fas fa-angle-right"></i></a>
                     </div>
                     <!-- Service 4 -->
-                    <div class="service-card" style="--bg-img: url('image/dijital-baski.jpg')">
+                    <div class="service-card" style="--bg-img: url('image/web-tasarim.webp')">
                         <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
                         <h3 class="service-title">Web Tasarım & Yazılım</h3>
                         <p class="service-text">Günümüz dijital dünyasında markanızın gücünü artıran, SEO uyumlu, mobil odaklı ve modern web siteleri.</p>
@@ -171,23 +253,6 @@
                         <h3 class="step-title">Uyguluyoruz</h3>
                         <p>Montaj ve kurulum işlemlerini, alanın gerekliliklerine uygun ve güvenli şekilde gerçekleştiriyoruz.</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- References Section -->
-        <section id="referanslar" class="references">
-            <div class="container">
-                <div class="section-header">
-                    <span class="subtitle">İş Birliklerimiz</span>
-                    <h2 class="section-title">Güçlü <span class="text-orange">Referanslarımız</span></h2>
-                    <p class="section-desc">Bizimle çalışan ve markasını bir adım öteye taşıyan değerli müşterilerimizden bazıları ve tamamladığımız projeler.</p>
-                </div>
-
-                <div class="portfolio-grid" id="portfolio-grid">
-                    <div class="loading-text text-center w-100 py-5">Referanslar yükleniyor...</div>
-                </div>
-
                 </div>
             </div>
         </section>
