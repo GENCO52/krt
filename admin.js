@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Login Elements
+    const loginOverlay = document.getElementById('login-overlay');
+    const loginForm = document.getElementById('login-form');
+    const loginError = document.getElementById('login-error');
+    const adminPassword = document.getElementById('admin-password');
+
+    // Admin Elements
     const modal = document.getElementById('add-modal');
     const addBtn = document.getElementById('add-reference-btn');
     const closeBtn = document.querySelector('.close-modal');
@@ -7,6 +14,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const overlay = document.getElementById('upload-overlay');
     const statusText = document.getElementById('upload-status');
     const listContainer = document.getElementById('references-list');
+
+    // Simple Authentication Check
+    const ADMIN_PASS = 'krt123'; // Bu şifreyi istediğiniz gibi değiştirebilirsiniz
+
+    const checkAuth = () => {
+        if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+            loginOverlay.classList.add('hidden');
+            loadReferences();
+        }
+    };
+
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (adminPassword.value === ADMIN_PASS) {
+            sessionStorage.setItem('adminLoggedIn', 'true');
+            loginOverlay.classList.add('hidden');
+            loadReferences();
+            loginError.classList.add('hidden');
+        } else {
+            loginError.classList.remove('hidden');
+            adminPassword.value = '';
+            adminPassword.focus();
+        }
+    });
 
     // Check if Supabase is configured
     if (SUPABASE_URL.includes('BURAYA')) {
@@ -21,6 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load existing references
     async function loadReferences() {
+        if (sessionStorage.getItem('adminLoggedIn') !== 'true') return;
+        
         try {
             const { data, error } = await supabase
                 .from('references')
@@ -56,7 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    loadReferences();
+    // Run auth check on load
+    checkAuth();
 
     // Generate unique file name
     const generateFileName = (file) => {
@@ -141,6 +175,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Logout logic
+    const logoutBtn = document.getElementById('logout-btn');
+    logoutBtn.addEventListener('click', () => {
+        if (confirm('Çıkış yapmak istediğinize emin misiniz?')) {
+            sessionStorage.removeItem('adminLoggedIn');
+            window.location.reload();
+        }
+    });
+
     // Delete Reference
     window.deleteReference = async (id) => {
         if(!confirm('Bu referansı silmek istediğinize emin misiniz?')) return;
@@ -155,3 +198,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 });
+

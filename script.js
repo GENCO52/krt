@@ -49,6 +49,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load References
     const portfolioGrid = document.getElementById('portfolio-grid');
+    const projectModal = document.getElementById('project-modal');
+    const closeProjectModal = document.querySelector('.close-project-modal');
+
+    if (projectModal) {
+        closeProjectModal.addEventListener('click', () => {
+            projectModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close on outside click
+        projectModal.addEventListener('click', (e) => {
+            if (e.target === projectModal) {
+                projectModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
+
     if (portfolioGrid && typeof supabase !== 'undefined') {
         if (SUPABASE_URL.includes('BURAYA')) {
             portfolioGrid.innerHTML = '<div class="w-100 text-center py-5">Referansları görmek için Supabase ayarlarını yapınız.</div>';
@@ -75,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data.forEach(ref => {
                 const item = document.createElement('div');
                 item.className = 'portfolio-item';
+                item.style.cursor = 'pointer';
                 item.innerHTML = `
                     <div class="portfolio-img-wrap">
                         <img src="${ref.cover_image_url}" alt="${ref.title}" class="portfolio-img">
@@ -84,6 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 `;
+                
+                item.addEventListener('click', () => openProjectDetail(ref));
                 portfolioGrid.appendChild(item);
             });
         } catch (error) {
@@ -91,4 +112,27 @@ document.addEventListener('DOMContentLoaded', () => {
             portfolioGrid.innerHTML = '<div class="w-100 text-center py-5 text-orange">Referanslar yüklenirken bir hata oluştu.</div>';
         }
     }
+
+    function openProjectDetail(project) {
+        const gallery = document.getElementById('project-gallery');
+        const title = document.getElementById('project-title');
+        const category = document.getElementById('project-category');
+        const description = document.getElementById('project-description');
+
+        title.innerText = project.title;
+        category.innerText = project.category;
+        description.innerText = project.description;
+
+        // Load Gallery
+        gallery.innerHTML = `<img src="${project.cover_image_url}" alt="${project.title}">`;
+        if (project.gallery_urls && project.gallery_urls.length > 0) {
+            project.gallery_urls.forEach(url => {
+                gallery.innerHTML += `<img src="${url}" alt="${project.title}">`;
+            });
+        }
+
+        projectModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 });
+

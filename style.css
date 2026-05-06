@@ -829,3 +829,112 @@ section {
     
     .section-title { font-size: 2rem; }
 }
+
+/* Project Modal Styles */
+.project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.project-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.project-modal-content {
+    width: 100%;
+    max-width: 1000px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    padding: 0;
+    border-radius: var(--radius-md);
+}
+
+.close-project-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: var(--transition);
+}
+
+.close-project-modal:hover {
+    background: var(--orange-primary);
+}
+
+.project-modal-body {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    min-height: 500px;
+}
+
+@media (max-width: 992px) {
+    .project-modal-body {
+        grid-template-columns: 1fr;
+    }
+}
+
+.project-modal-gallery {
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+.project-modal-gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.project-modal-info {
+    padding: 40px;
+    background: var(--bg-card);
+}
+
+.project-modal-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin: 10px 0 20px;
+}
+
+.project-modal-desc {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    white-space: pre-wrap;
+}
+
+.project-modal-footer {
+    border-top: 1px solid var(--border-color);
+    padding-top: 30px;
+}
+

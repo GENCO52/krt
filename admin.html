@@ -21,13 +21,38 @@
     <link rel="stylesheet" href="admin.css">
 </head>
 <body class="admin-body">
+    <!-- Login Overlay -->
+    <div id="login-overlay" class="login-overlay">
+        <div class="login-card glass-card">
+            <div class="login-header">
+                <img src="logolar/logo.png" alt="KRT Reklam" class="login-logo">
+                <h2>Yönetici Girişi</h2>
+                <p>Devam etmek için lütfen şifrenizi giriniz.</p>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="admin-password">Şifre</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="admin-password" placeholder="••••••••" required>
+                        <i class="fas fa-lock input-icon"></i>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
+                <div id="login-error" class="login-error hidden">Hatalı şifre!</div>
+            </form>
+        </div>
+    </div>
+
     <header class="admin-header glass-card">
         <div class="container admin-nav">
             <a href="index.html" class="logo">
                 <img src="logolar/logo.png" alt="KRT Reklam Bilişim" class="nav-logo-img">
                 <span class="admin-badge">Yönetim Paneli</span>
             </a>
-            <a href="index.html" class="btn btn-outline btn-sm"><i class="fas fa-home"></i> Siteye Dön</a>
+            <div class="admin-nav-actions">
+                <a href="index.html" class="btn btn-outline btn-sm"><i class="fas fa-home"></i> Siteye Dön</a>
+                <button id="logout-btn" class="btn btn-outline btn-sm"><i class="fas fa-sign-out-alt"></i> Çıkış</button>
+            </div>
         </div>
     </header>
 
