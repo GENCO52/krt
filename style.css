@@ -2514,10 +2514,24 @@ section {
     .references { padding: 32px 0; }
     .references .section-header { display: none; }
     .portfolio-slider-wrapper {
-        display: block;   /* görünür yap */
-        overflow: hidden;
+        display: flex;    /* ok | grid | ok yan yana */
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 0;
+        overflow: visible;
     }
-    .portfolio-nav-btn    { display: none; } /* ok butonlarını gizle */
+    /* grid esnek genişlikte, kendi scroll'u var */
+    .portfolio-slider-wrapper .portfolio-grid {
+        flex: 1;
+        min-width: 0;
+    }
+    /* ok butonları — küçük, slider kenarlarında */
+    .portfolio-nav-btn {
+        display: flex;
+        width: 34px; height: 34px;
+        flex-shrink: 0;
+        font-size: .85rem;
+    }
     .portfolio-slider-footer { display: none; }
 
     /* Referanslar — yatay kaydırmalı slider */

@@ -102,6 +102,25 @@
         });
     }
 
+    // --- Referans slider ok butonları (mobilde yatay scroll) ---
+    const refPrev = document.getElementById('portfolio-prev');
+    const refNext = document.getElementById('portfolio-next');
+    const refGrid = document.getElementById('portfolio-grid');
+    if (refPrev && refGrid) {
+        refPrev.onclick = (e) => {
+            if (!isMobile()) return;
+            e.stopImmediatePropagation();
+            refGrid.scrollBy({ left: -185, behavior: 'smooth' });
+        };
+    }
+    if (refNext && refGrid) {
+        refNext.onclick = (e) => {
+            if (!isMobile()) return;
+            e.stopImmediatePropagation();
+            refGrid.scrollBy({ left: 185, behavior: 'smooth' });
+        };
+    }
+
     // --- Teklif Form Modalı ---
     const quoteModal  = document.getElementById('quote-modal');
     const openQuoteBtn  = document.getElementById('open-quote-form');
