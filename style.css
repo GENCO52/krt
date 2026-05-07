@@ -728,6 +728,9 @@ section {
 }
 
 /* References / Portfolio */
+.references { padding-bottom: 30px; }
+.services   { padding-top: 40px; }
+
 .references .section-header {
     text-align: center;
     margin-left: auto;
@@ -778,7 +781,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 }
 
 .portfolio-dots {
