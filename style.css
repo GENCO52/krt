@@ -180,20 +180,20 @@ select:focus-visible {
 /* Header & Navbar */
 .header {
     position: fixed;
-    top: 27px;
+    top: 26px;
     left: 0;
     width: 100%;
     z-index: 1000;
     transition: var(--transition);
-    padding: 20px 0;
-    border-bottom: 1px solid transparent;
+    padding: 10px 0;
+    background: rgba(15, 17, 21, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .header.scrolled {
-    padding: 10px 0;
-    background: rgba(15, 17, 21, 0.9);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-color);
+    padding: 8px 0;
 }
 
 .navbar {
