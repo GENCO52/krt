@@ -43,8 +43,8 @@
             <img src="logolar/logo.png" alt="KRT Reklam" class="mob-header-logo">
         </a>
         <div class="mob-header-icons">
-            <a href="https://wa.me/905431265878" class="mob-header-icon" target="_blank" aria-label="WhatsApp">
-                <i class="fab fa-whatsapp"></i>
+            <a href="tel:+905431265878" class="mob-header-icon" aria-label="Telefon">
+                <i class="fas fa-phone-alt"></i>
             </a>
         </div>
     </div>
@@ -603,6 +603,75 @@
         </div>
     </div>
 
+    <!-- ===== TEKLİF FORM MODALI (+ butonundan açılır) ===== -->
+    <div id="quote-modal" class="quote-modal" role="dialog" aria-modal="true" aria-labelledby="quote-modal-title">
+        <div class="quote-modal-sheet">
+            <div class="quote-modal-handle"></div>
+            <div class="quote-modal-header">
+                <h2 id="quote-modal-title" class="quote-modal-title">Teklif İste</h2>
+                <button id="close-quote-modal" class="quote-modal-close" aria-label="Kapat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <form id="quote-form">
+                <!-- Web3Forms API key — web3forms.com adresinden ücretsiz alınır -->
+                <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
+                <input type="hidden" name="subject" value="KRT Reklam - Yeni Teklif Talebi">
+                <input type="hidden" name="from_name" value="KRT Web Formu">
+                <input type="hidden" name="replyto" value="info@krtreklambilisim.com">
+                <input type="checkbox" name="botcheck" style="display:none">
+
+                <div class="qf-field">
+                    <label class="qf-label" for="qf-name">Ad Soyad <span class="qf-required">*</span></label>
+                    <input class="qf-input" type="text" id="qf-name" name="name" required placeholder="Adınız Soyadınız" autocomplete="name">
+                </div>
+
+                <div class="qf-field">
+                    <label class="qf-label" for="qf-phone">Telefon <span class="qf-required">*</span></label>
+                    <input class="qf-input" type="tel" id="qf-phone" name="phone" required placeholder="05XX XXX XX XX" autocomplete="tel">
+                </div>
+
+                <div class="qf-field">
+                    <label class="qf-label" for="qf-email">E-posta</label>
+                    <input class="qf-input" type="email" id="qf-email" name="email" placeholder="ornek@mail.com" autocomplete="email">
+                </div>
+
+                <div class="qf-field">
+                    <label class="qf-label" for="qf-service">Hizmet Türü <span class="qf-required">*</span></label>
+                    <select class="qf-input qf-select" id="qf-service" name="service" required>
+                        <option value="">Seçiniz...</option>
+                        <option>Tabela &amp; Totem İmalatı</option>
+                        <option>Araç Kaplama</option>
+                        <option>Cephe Giydirme</option>
+                        <option>Web Tasarım &amp; Yazılım</option>
+                        <option>Dijital Reklam &amp; SEO</option>
+                        <option>Dijital Baskı &amp; Kutu Harf</option>
+                    </select>
+                </div>
+
+                <div class="qf-field">
+                    <label class="qf-label" for="qf-message">Mesajınız</label>
+                    <textarea class="qf-input qf-textarea" id="qf-message" name="message" rows="3" placeholder="Projeniz hakkında kısaca bilgi verin..."></textarea>
+                </div>
+
+                <button type="submit" class="qf-submit" id="qf-submit-btn">
+                    <i class="fas fa-paper-plane"></i> Teklif Talep Et
+                </button>
+            </form>
+
+            <!-- Başarı mesajı -->
+            <div id="quote-success" class="quote-success">
+                <div class="quote-success-icon"><i class="fas fa-check-circle"></i></div>
+                <h3>Talebiniz Alındı!</h3>
+                <p>En kısa sürede sizinle iletişime geçeceğiz.</p>
+                <button class="qf-submit" onclick="document.getElementById('quote-modal').classList.remove('active');document.body.style.overflow='';" style="margin-top:8px">
+                    Tamam
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Floating WhatsApp Button -->
     <a href="https://wa.me/905431265878" class="whatsapp-float" target="_blank" aria-label="WhatsApp'tan Bize Ulaşın">
         <i class="fab fa-whatsapp"></i>
@@ -619,16 +688,16 @@
             <i class="fas fa-th-large"></i>
             <span>Hizmetler</span>
         </a>
-        <a href="https://wa.me/905431265878" class="mob-nav-item mob-nav-cta" target="_blank" aria-label="Teklif Al">
+        <button class="mob-nav-item mob-nav-cta" id="open-quote-form" aria-label="Teklif İste">
             <i class="fas fa-plus"></i>
-        </a>
-        <a href="#referanslar" class="mob-nav-item" data-section="referanslar">
+        </button>
+        <a href="referanslar.html" class="mob-nav-item" data-section="referanslar">
             <i class="fas fa-images"></i>
             <span>Referanslar</span>
         </a>
-        <a href="#mob-iletisim" class="mob-nav-item" data-section="mob-iletisim">
-            <i class="fas fa-phone-alt"></i>
-            <span>İletişim</span>
+        <a href="https://wa.me/905431265878" class="mob-nav-item mob-nav-whatsapp" target="_blank" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+            <span>WhatsApp</span>
         </a>
     </nav>
 

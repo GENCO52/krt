@@ -102,6 +102,61 @@
         });
     }
 
+    // --- Teklif Form Modalı ---
+    const quoteModal  = document.getElementById('quote-modal');
+    const openQuoteBtn  = document.getElementById('open-quote-form');
+    const closeQuoteBtn = document.getElementById('close-quote-modal');
+    const quoteForm   = document.getElementById('quote-form');
+    const quoteSuccess = document.getElementById('quote-success');
+    const quoteSubmitBtn = document.getElementById('qf-submit-btn');
+
+    const openQuote = () => {
+        if (!quoteModal) return;
+        // Başarı ekranını sıfırla
+        if (quoteSuccess) quoteSuccess.style.display = 'none';
+        if (quoteForm)    { quoteForm.style.display = ''; quoteForm.reset(); }
+        if (quoteSubmitBtn) { quoteSubmitBtn.disabled = false; quoteSubmitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Teklif Talep Et'; }
+        quoteModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    };
+    const closeQuote = () => {
+        if (!quoteModal) return;
+        quoteModal.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
+    if (openQuoteBtn)  openQuoteBtn.addEventListener('click', openQuote);
+    if (closeQuoteBtn) closeQuoteBtn.addEventListener('click', closeQuote);
+    if (quoteModal)    quoteModal.addEventListener('click', e => { if (e.target === quoteModal) closeQuote(); });
+
+    if (quoteForm) {
+        quoteForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (quoteSubmitBtn) {
+                quoteSubmitBtn.disabled = true;
+                quoteSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
+            }
+            try {
+                const formData = new FormData(quoteForm);
+                const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
+                const json = await res.json();
+                if (json.success) {
+                    if (quoteForm)    quoteForm.style.display = 'none';
+                    if (quoteSuccess) quoteSuccess.style.display = 'flex';
+                    setTimeout(closeQuote, 4000);
+                } else {
+                    throw new Error(json.message || 'Gönderilemedi');
+                }
+            } catch (err) {
+                if (quoteSubmitBtn) {
+                    quoteSubmitBtn.disabled = false;
+                    quoteSubmitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Teklif Talep Et';
+                }
+                alert('Form gönderilemedi, lütfen tekrar deneyin veya bizi arayın: 0543 126 58 78');
+            }
+        });
+    }
+
     // --- Mobil hamburger menü (mobile-header'daki) ---
     const mobMenuBtn = document.getElementById('mob-menu-btn');
     if (mobMenuBtn) {
