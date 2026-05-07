@@ -1980,7 +1980,7 @@ section {
     padding-right: 38px;
     cursor: pointer;
 }
-.qf-textarea { resize: vertical; min-height: 80px; }
+.qf-textarea { resize: vertical; min-height: 140px; }
 .qf-submit {
     width: 100%;
     padding: 15px;
