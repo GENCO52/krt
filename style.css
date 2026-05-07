@@ -2513,10 +2513,14 @@ section {
     /* Referanslar bölümü */
     .references { padding: 32px 0; }
     .references .section-header { display: none; }
-    .portfolio-slider-wrapper { display: none; }
-    .portfolio-slider-footer  { display: none; }
+    .portfolio-slider-wrapper {
+        display: block;   /* görünür yap */
+        overflow: hidden;
+    }
+    .portfolio-nav-btn    { display: none; } /* ok butonlarını gizle */
+    .portfolio-slider-footer { display: none; }
 
-    /* Referanslar grid mobil — her sayfada 2 sütun */
+    /* Referanslar grid mobil — 2 sütun */
     .portfolio-grid {
         grid-template-columns: repeat(2,1fr);
         gap: 10px;
