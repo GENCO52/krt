@@ -130,7 +130,7 @@
     if (quoteModal)    quoteModal.addEventListener('click', e => { if (e.target === quoteModal) closeQuote(); });
 
     // Google Apps Script URL — deploy sonrası buraya yapıştır
-    const GAS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxiyRUybZ88fAuk5gxenlSyGTkhdJMD8RuTcFZN6fdp1dOF7SXROu9jXD9pSecY8D3Raw/exec';
 
     if (quoteForm) {
         quoteForm.addEventListener('submit', async (e) => {
