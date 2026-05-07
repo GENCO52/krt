@@ -362,6 +362,14 @@
 
 .password-input-wrapper input {
     padding-left: 45px !important;
+    padding-right: 45px !important;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+.password-input-wrapper input::placeholder {
+    letter-spacing: 0;
+    text-align: center;
 }
 
 .input-icon {
@@ -370,7 +378,25 @@
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-muted);
+    pointer-events: none;
 }
+
+.pw-toggle-btn {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    font-size: .95rem;
+    transition: color .2s;
+    line-height: 1;
+}
+
+.pw-toggle-btn:hover { color: var(--orange-primary); }
 
 .btn-block {
     width: 100%;
