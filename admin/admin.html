@@ -50,7 +50,9 @@
                     const icon = document.getElementById('pw-toggle-icon');
                     const inp  = document.getElementById('admin-password');
                     if(btn) btn.addEventListener('click', () => {
-                        inp.type = inp.type === 'password' ? 'text' : 'password';
+                        const show = inp.type === 'password';
+                        inp.type = show ? 'text' : 'password';
+                        icon.className = show ? 'fas fa-eye' : 'fas fa-eye-slash';
                     });
                 })();
                 </script>
