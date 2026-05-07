@@ -1837,6 +1837,7 @@ section {
     left: 0;
     width: 100%;
     z-index: 1000;
+    touch-action: manipulation;
     background: rgba(10,11,14,.97);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
@@ -1857,6 +1858,9 @@ section {
     padding: 6px 0;
     transition: color .2s;
     position: relative;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
 }
 .mob-nav-item i { font-size: 1.2rem; transition: color .2s; }
 .mob-nav-item.active { color: var(--orange-primary); }
