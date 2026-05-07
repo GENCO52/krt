@@ -20,28 +20,54 @@
         splash.style.display = 'none';
     }
 
-    // --- Screen 2: Featured Slider ---
+    // --- Screen 2: Featured Slider (geliştirilmiş) ---
     const mobSlider = document.getElementById('mob-featured-slider');
     if (mobSlider) {
         const slides = mobSlider.querySelectorAll('.mob-featured-slide');
         const dots   = mobSlider.querySelectorAll('.mob-featured-dot');
         let cur = 0;
+        let iv  = null;
+
         const goTo = (i) => {
-            slides[cur].classList.remove('active');
-            dots[cur].classList.remove('active');
+            const prev = cur;
             cur = (i + slides.length) % slides.length;
+            slides[prev].classList.remove('active');
+            if (dots[prev]) dots[prev].classList.remove('active');
             slides[cur].classList.add('active');
-            dots[cur].classList.add('active');
+            if (dots[cur]) dots[cur].classList.add('active');
         };
-        let iv = setInterval(() => goTo(cur + 1), 4200);
-        dots.forEach((d, i) => d.addEventListener('click', () => { clearInterval(iv); goTo(i); iv = setInterval(() => goTo(cur + 1), 4200); }));
-        // Touch swipe
+
+        const startAuto = () => {
+            if (iv) clearInterval(iv);
+            iv = setInterval(() => goTo(cur + 1), 4200);
+        };
+        const stopAuto = () => { if (iv) { clearInterval(iv); iv = null; } };
+
+        // İlk slaytı geçişsiz göster, sonra transition'ı aç
+        slides[0].classList.add('no-transition', 'active');
+        if (dots[0]) dots[0].classList.add('active');
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                slides[0].classList.remove('no-transition');
+                startAuto();
+            });
+        });
+
+        // Dot tıklama
+        dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); startAuto(); }));
+
+        // Dokunarak kaydır
         let tx = 0;
         mobSlider.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
         mobSlider.addEventListener('touchend', e => {
             const diff = tx - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 45) { clearInterval(iv); goTo(diff > 0 ? cur + 1 : cur - 1); iv = setInterval(() => goTo(cur + 1), 4200); }
+            if (Math.abs(diff) > 45) { goTo(diff > 0 ? cur + 1 : cur - 1); startAuto(); }
         }, { passive: true });
+
+        // Tab gizlenince durdur, geri gelince devam et
+        document.addEventListener('visibilitychange', () => {
+            document.hidden ? stopAuto() : startAuto();
+        });
     }
 
     // --- Screen 2/3: Grid ↔ Liste toggle ---

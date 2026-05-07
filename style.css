@@ -2077,9 +2077,12 @@ section {
     background-size: cover;
     background-position: center;
     opacity: 0;
-    transition: opacity .65s ease;
+    transition: opacity .55s ease;
+    will-change: opacity;
 }
 .mob-featured-slide.active { opacity: 1; }
+/* İlk yüklemede geçişsiz göster */
+.mob-featured-slide.no-transition { transition: none !important; }
 .mob-featured-overlay {
     position: absolute;
     inset: 0;
