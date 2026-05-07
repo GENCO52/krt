@@ -2388,7 +2388,7 @@ section {
 /* Harita Alanı (Screen 5 alt görsel) */
 .mob-map-area {
     width: 100%;
-    height: 180px;
+    height: 220px;
     border-radius: var(--radius-sm);
     overflow: hidden;
     position: relative;
