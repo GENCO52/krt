@@ -2520,11 +2520,25 @@ section {
     .portfolio-nav-btn    { display: none; } /* ok butonlarını gizle */
     .portfolio-slider-footer { display: none; }
 
-    /* Referanslar grid mobil — 2 sütun */
+    /* Referanslar — yatay kaydırmalı slider */
     .portfolio-grid {
-        grid-template-columns: repeat(2,1fr);
-        gap: 10px;
+        display: flex !important;
+        grid-template-columns: unset;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 12px;
+        padding-bottom: 4px;
         margin-bottom: 0;
+    }
+    .portfolio-grid::-webkit-scrollbar { display: none; }
+    .portfolio-item {
+        flex: 0 0 160px;
+        width: 160px;
+        scroll-snap-align: start;
+        aspect-ratio: 4/3;
+        border-radius: var(--radius-sm);
     }
 
     /* Diğer bölümler gizle (mobil iletişim kendi section'ı var) */
