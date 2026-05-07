@@ -364,12 +364,6 @@
     padding-left: 45px !important;
     padding-right: 45px !important;
     text-align: center;
-    letter-spacing: 3px;
-}
-
-.password-input-wrapper input::placeholder {
-    letter-spacing: 0;
-    text-align: center;
 }
 
 .input-icon {
