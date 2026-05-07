@@ -33,9 +33,57 @@
         .ref-page-content {
             padding-bottom: 80px;
         }
+        @media (max-width: 768px) {
+            body { padding-top: 60px; padding-bottom: 76px; }
+            .header, .top-bar { display: none !important; }
+            .ref-page-hero { padding: 24px 0 20px; }
+            .ref-page-hero .section-title { font-size: 1.5rem; }
+            .ref-page-hero p { font-size: .88rem; margin-bottom: 20px; }
+            .ref-page-content { padding-bottom: 20px; }
+            .footer { display: none; }
+            /* Filtre bar yatay kaydırma */
+            .filter-bar {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scrollbar-width: none;
+                padding-bottom: 6px;
+                -webkit-overflow-scrolling: touch;
+                gap: 8px;
+            }
+            .filter-bar::-webkit-scrollbar { display: none; }
+            .filter-btn {
+                flex-shrink: 0;
+                border-radius: 20px;
+                padding: 8px 16px;
+                font-size: .8rem;
+            }
+            /* 2 sütun grid */
+            .portfolio-grid.full-grid {
+                grid-template-columns: repeat(2,1fr);
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            /* Referans başlık gizle, mobil header yeterli */
+            .ref-page-hero .btn { font-size: .82rem; padding: 8px 16px; }
+        }
     </style>
 </head>
 <body>
+    <!-- Mobil Kompakt Header -->
+    <div class="mobile-header" id="mobile-header">
+        <a href="index.html" class="mob-header-menu" aria-label="Geri" style="text-decoration:none">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <a href="index.html" class="mob-logo-link">
+            <img src="logolar/logo.png" alt="KRT Reklam" class="mob-header-logo">
+        </a>
+        <div class="mob-header-icons">
+            <a href="https://wa.me/905431265878" class="mob-header-icon" target="_blank" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+
     <!-- Top Bar -->
     <div class="top-bar">
         <div class="container top-bar-inner">
@@ -183,6 +231,29 @@
             </div>
         </div>
     </div>
+
+    <!-- Mobil Alt Navigasyon -->
+    <nav class="mobile-bottom-nav" id="mobile-bottom-nav" aria-label="Ana navigasyon">
+        <a href="index.html#anasayfa" class="mob-nav-item" data-section="anasayfa">
+            <i class="fas fa-home"></i>
+            <span>Anasayfa</span>
+        </a>
+        <a href="index.html#hizmetler" class="mob-nav-item" data-section="hizmetler">
+            <i class="fas fa-th-large"></i>
+            <span>Hizmetler</span>
+        </a>
+        <a href="https://wa.me/905431265878" class="mob-nav-item mob-nav-cta" target="_blank" aria-label="Teklif Al">
+            <i class="fas fa-plus"></i>
+        </a>
+        <a href="referanslar.html" class="mob-nav-item active" data-section="referanslar">
+            <i class="fas fa-images"></i>
+            <span>Referanslar</span>
+        </a>
+        <a href="index.html#mob-iletisim" class="mob-nav-item" data-section="mob-iletisim">
+            <i class="fas fa-phone-alt"></i>
+            <span>İletişim</span>
+        </a>
+    </nav>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabaseClient.js"></script>

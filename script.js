@@ -1,3 +1,125 @@
+// ================================================================
+//  MOBİL UYGULAMA DAVRANIŞLARI
+// ================================================================
+(function() {
+    const isMobile = () => window.innerWidth <= 768;
+
+    // --- Screen 1: Splash ---
+    const splash = document.getElementById('mobile-splash');
+    const splashBtn = document.getElementById('splash-enter-btn');
+    if (splash && isMobile() && !sessionStorage.getItem('krt_splash')) {
+        splash.style.display = 'flex';
+        const dismiss = () => {
+            splash.classList.add('hidden');
+            setTimeout(() => { splash.style.display = 'none'; }, 600);
+            sessionStorage.setItem('krt_splash', '1');
+        };
+        if (splashBtn) splashBtn.addEventListener('click', dismiss);
+        setTimeout(dismiss, 6000);
+    } else if (splash) {
+        splash.style.display = 'none';
+    }
+
+    // --- Screen 2: Featured Slider ---
+    const mobSlider = document.getElementById('mob-featured-slider');
+    if (mobSlider) {
+        const slides = mobSlider.querySelectorAll('.mob-featured-slide');
+        const dots   = mobSlider.querySelectorAll('.mob-featured-dot');
+        let cur = 0;
+        const goTo = (i) => {
+            slides[cur].classList.remove('active');
+            dots[cur].classList.remove('active');
+            cur = (i + slides.length) % slides.length;
+            slides[cur].classList.add('active');
+            dots[cur].classList.add('active');
+        };
+        let iv = setInterval(() => goTo(cur + 1), 4200);
+        dots.forEach((d, i) => d.addEventListener('click', () => { clearInterval(iv); goTo(i); iv = setInterval(() => goTo(cur + 1), 4200); }));
+        // Touch swipe
+        let tx = 0;
+        mobSlider.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+        mobSlider.addEventListener('touchend', e => {
+            const diff = tx - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 45) { clearInterval(iv); goTo(diff > 0 ? cur + 1 : cur - 1); iv = setInterval(() => goTo(cur + 1), 4200); }
+        }, { passive: true });
+    }
+
+    // --- Screen 2/3: Grid ↔ Liste toggle ---
+    const mobViewBtns  = document.querySelectorAll('.mob-view-btn');
+    const mobGrid      = document.getElementById('mob-service-grid');
+    const mobList      = document.getElementById('mob-service-list');
+    mobViewBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            mobViewBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.view === 'grid') {
+                if (mobGrid) mobGrid.style.display = 'grid';
+                if (mobList) mobList.style.display = 'none';
+            } else {
+                if (mobGrid) mobGrid.style.display = 'none';
+                if (mobList) { mobList.style.display = 'flex'; }
+            }
+        });
+    });
+
+    // --- Alt Navigasyon: scroll ile aktif sekme güncelle ---
+    const bottomNav = document.getElementById('mobile-bottom-nav');
+    if (bottomNav) {
+        const sections = [
+            { id: 'anasayfa',    el: document.getElementById('anasayfa') },
+            { id: 'hizmetler',   el: document.getElementById('hizmetler') },
+            { id: 'referanslar', el: document.getElementById('referanslar') },
+            { id: 'mob-iletisim', el: document.getElementById('mob-iletisim') },
+        ];
+        const navItems = bottomNav.querySelectorAll('.mob-nav-item[data-section]');
+        const setActive = (id) => {
+            navItems.forEach(it => {
+                it.classList.toggle('active', it.dataset.section === id);
+            });
+        };
+        const onScroll = () => {
+            let active = sections[0].id;
+            sections.forEach(s => {
+                if (s.el && window.scrollY + window.innerHeight / 2 >= s.el.offsetTop) {
+                    active = s.id;
+                }
+            });
+            setActive(active);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    }
+
+    // --- Mobil referans filtre chip'leri → referanslar.html yönlendir ---
+    const mobRefFilter = document.getElementById('mob-ref-filter');
+    if (mobRefFilter) {
+        mobRefFilter.querySelectorAll('.mob-filter-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                mobRefFilter.querySelectorAll('.mob-filter-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                window.location.href = 'referanslar.html';
+            });
+        });
+    }
+
+    // --- Mobil hamburger menü (mobile-header'daki) ---
+    const mobMenuBtn = document.getElementById('mob-menu-btn');
+    if (mobMenuBtn) {
+        mobMenuBtn.addEventListener('click', () => {
+            // Mevcut nav-menu'yu toggle et
+            const navMenu = document.querySelector('.nav-menu');
+            if (navMenu) {
+                navMenu.classList.toggle('active');
+                const icon = mobMenuBtn.querySelector('i');
+                icon.className = navMenu.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+            }
+        });
+    }
+})();
+
+// ================================================================
+//  ANA SAYFA KODU (mevcut)
+// ================================================================
 // Mobil menü açma kapama
 document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');

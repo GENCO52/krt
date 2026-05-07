@@ -17,6 +17,38 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- ===== MOBİL SPLASH EKRANI (Screen 1) ===== -->
+    <div id="mobile-splash" class="mobile-splash" role="dialog" aria-modal="true" aria-label="KRT Reklam Giriş">
+        <div class="splash-blob"></div>
+        <div class="splash-blob splash-blob-2"></div>
+        <div class="splash-content">
+            <div class="splash-logo-circle">
+                <img src="logolar/logo.png" alt="KRT Reklam & Bilişim">
+            </div>
+            <h1 class="splash-title">KRT Reklam<br>&amp; Bilişim</h1>
+            <p class="splash-desc">Sakarya'nın Lider<br>Kreatif Reklam Ajansı</p>
+            <button class="splash-btn" id="splash-enter-btn">
+                Keşfet <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== MOBİL KOMPAKT HEADER (Screen 2 header) ===== -->
+    <div class="mobile-header" id="mobile-header">
+        <button class="mob-header-menu" id="mob-menu-btn" aria-label="Menüyü aç">
+            <i class="fas fa-bars"></i>
+        </button>
+        <a href="#anasayfa" class="mob-logo-link">
+            <img src="logolar/logo.png" alt="KRT Reklam" class="mob-header-logo">
+        </a>
+        <div class="mob-header-icons">
+            <a href="https://wa.me/905431265878" class="mob-header-icon" target="_blank" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+
     <!-- Top Bar -->
     <div class="top-bar">
         <div class="container top-bar-inner">
@@ -133,6 +165,36 @@
                 </div>
             </div>
             <div class="hero-bottom-glow"></div>
+
+            <!-- ===== MOBİL FEATURED SLİDER (Screen 2 – öne çıkan banner) ===== -->
+            <div class="mob-featured-slider" id="mob-featured-slider">
+                <div class="mob-featured-slide active" style="background-image:url('image/kutu-harf.jpg')">
+                    <div class="mob-featured-overlay">
+                        <span class="mob-featured-badge">Öne Çıkan Hizmet</span>
+                        <h2 class="mob-featured-title">Kutu Harf &amp; Işıklı Tabelalar</h2>
+                        <a href="#hizmetler" class="mob-featured-btn">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="mob-featured-slide" style="background-image:url('image/totem-imalat.jpg')">
+                    <div class="mob-featured-overlay">
+                        <span class="mob-featured-badge">Öne Çıkan Hizmet</span>
+                        <h2 class="mob-featured-title">Tabela &amp; Totem İmalatı</h2>
+                        <a href="#hizmetler" class="mob-featured-btn">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="mob-featured-slide" style="background-image:url('image/arac-kaplama.jpg')">
+                    <div class="mob-featured-overlay">
+                        <span class="mob-featured-badge">Öne Çıkan Hizmet</span>
+                        <h2 class="mob-featured-title">Profesyonel Araç Kaplama</h2>
+                        <a href="#hizmetler" class="mob-featured-btn">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="mob-featured-dots" id="mob-featured-dots">
+                    <span class="mob-featured-dot active"></span>
+                    <span class="mob-featured-dot"></span>
+                    <span class="mob-featured-dot"></span>
+                </div>
+            </div>
         </section>
 
         <!-- Client Logos Slider (Dynamic from Supabase) -->
@@ -151,6 +213,20 @@
                     <span class="subtitle">İş Birliklerimiz</span>
                     <h2 class="section-title">Güçlü <span class="text-orange">Referanslarımız</span></h2>
                     <p class="section-desc">Bizimle çalışan ve markasını bir adım öteye taşıyan değerli müşterilerimizden bazıları ve tamamladığımız projeler.</p>
+                </div>
+
+                <!-- ===== MOBİL REFERANSLAR HEADER + FİLTRE CHIPS (Screen 6) ===== -->
+                <div class="mob-section-header">
+                    <h2 class="mob-section-title">Referanslarımız</h2>
+                    <a href="referanslar.html" class="mob-see-all">Tümü <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="mob-filter-scroll" id="mob-ref-filter">
+                    <button class="mob-filter-chip active" data-href="referanslar.html">Tümü</button>
+                    <button class="mob-filter-chip" data-href="referanslar.html">Totem Tabela</button>
+                    <button class="mob-filter-chip" data-href="referanslar.html">Araç Kaplama</button>
+                    <button class="mob-filter-chip" data-href="referanslar.html">Kutu Harf</button>
+                    <button class="mob-filter-chip" data-href="referanslar.html">Web Tasarım</button>
+                    <button class="mob-filter-chip" data-href="referanslar.html">Cephe Giydirme</button>
                 </div>
 
                 <div class="portfolio-slider-wrapper">
@@ -180,6 +256,119 @@
                     <span class="subtitle">Neler Yapıyoruz?</span>
                     <h2 class="section-title">Profesyonel <span class="text-orange">Hizmetlerimiz</span></h2>
                     <p class="section-desc">Markanızın hedef kitlesiyle etkili ve çarpıcı bir şekilde iletişim kurmasını sağlayan yenilikçi çözümler sunuyoruz.</p>
+                </div>
+
+                <!-- ===== MOBİL HİZMETLER HEADER + GRID/LİSTE TOGGLE (Screen 2 & 3) ===== -->
+                <div class="mob-section-header">
+                    <h2 class="mob-section-title">Hizmetlerimiz</h2>
+                    <div class="mob-view-toggle">
+                        <button class="mob-view-btn active" data-view="grid" aria-label="Kart görünümü" title="Grid"><i class="fas fa-th"></i></button>
+                        <button class="mob-view-btn" data-view="list" aria-label="Liste görünümü" title="Liste"><i class="fas fa-list"></i></button>
+                    </div>
+                </div>
+
+                <!-- MOBİL HİZMET GRID (2 sütun – Screen 2) -->
+                <div class="mob-service-grid" id="mob-service-grid">
+                    <a href="#hizmetler" class="mob-service-card">
+                        <img src="image/totem-imalat.jpg" alt="Tabela &amp; Totem" class="mob-service-card-img">
+                        <div class="mob-service-card-body">
+                            <div class="mob-service-card-icon"><i class="fas fa-sign"></i></div>
+                            <h3 class="mob-service-card-title">Tabela &amp; Totem</h3>
+                        </div>
+                    </a>
+                    <a href="#hizmetler" class="mob-service-card">
+                        <img src="image/arac-kaplama.jpg" alt="Araç Kaplama" class="mob-service-card-img">
+                        <div class="mob-service-card-body">
+                            <div class="mob-service-card-icon"><i class="fas fa-car-side"></i></div>
+                            <h3 class="mob-service-card-title">Araç Kaplama</h3>
+                        </div>
+                    </a>
+                    <a href="#hizmetler" class="mob-service-card">
+                        <img src="image/cephe-giydirme.jpg" alt="Cephe Giydirme" class="mob-service-card-img">
+                        <div class="mob-service-card-body">
+                            <div class="mob-service-card-icon"><i class="fas fa-building"></i></div>
+                            <h3 class="mob-service-card-title">Cephe Giydirme</h3>
+                        </div>
+                    </a>
+                    <a href="#hizmetler" class="mob-service-card">
+                        <img src="image/web-tasarim.webp" alt="Web Tasarım" class="mob-service-card-img">
+                        <div class="mob-service-card-body">
+                            <div class="mob-service-card-icon"><i class="fas fa-laptop-code"></i></div>
+                            <h3 class="mob-service-card-title">Web Tasarım</h3>
+                        </div>
+                    </a>
+                    <a href="#hizmetler" class="mob-service-card">
+                        <img src="image/seo-ve-google-ads.jpg" alt="Dijital Reklam" class="mob-service-card-img">
+                        <div class="mob-service-card-body">
+                            <div class="mob-service-card-icon"><i class="fas fa-search-dollar"></i></div>
+                            <h3 class="mob-service-card-title">Dijital Reklam &amp; SEO</h3>
+                        </div>
+                    </a>
+                    <a href="#hizmetler" class="mob-service-card">
+                        <img src="image/kutu-harf.jpg" alt="Dijital Baskı" class="mob-service-card-img">
+                        <div class="mob-service-card-body">
+                            <div class="mob-service-card-icon"><i class="fas fa-print"></i></div>
+                            <h3 class="mob-service-card-title">Dijital Baskı &amp; Kutu Harf</h3>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- MOBİL HİZMET LİSTE GÖRÜNÜMÜ (thumbnail solda – Screen 3) -->
+                <div class="mob-service-list" id="mob-service-list">
+                    <a href="#hizmetler" class="mob-service-list-item">
+                        <img src="image/totem-imalat.jpg" alt="Tabela" class="mob-list-thumb">
+                        <div class="mob-list-info">
+                            <span class="mob-list-category">Reklam Çözümleri</span>
+                            <h3 class="mob-list-title">Tabela &amp; Totem İmalatı</h3>
+                            <p class="mob-list-desc">Dikkat çekici ve uzun ömürlü totem ve tabela sistemleri tasarlıyoruz.</p>
+                        </div>
+                        <div class="mob-list-arrow"><i class="fas fa-chevron-right"></i></div>
+                    </a>
+                    <a href="#hizmetler" class="mob-service-list-item">
+                        <img src="image/arac-kaplama.jpg" alt="Araç Kaplama" class="mob-list-thumb">
+                        <div class="mob-list-info">
+                            <span class="mob-list-category">Reklam Çözümleri</span>
+                            <h3 class="mob-list-title">Araç Kaplama</h3>
+                            <p class="mob-list-desc">Hareketli reklam panosu işlevi gören profesyonel kaplama uygulamaları.</p>
+                        </div>
+                        <div class="mob-list-arrow"><i class="fas fa-chevron-right"></i></div>
+                    </a>
+                    <a href="#hizmetler" class="mob-service-list-item">
+                        <img src="image/cephe-giydirme.jpg" alt="Cephe Giydirme" class="mob-list-thumb">
+                        <div class="mob-list-info">
+                            <span class="mob-list-category">Reklam Çözümleri</span>
+                            <h3 class="mob-list-title">Cephe Giydirme</h3>
+                            <p class="mob-list-desc">Bina cephelerini kurumsal kimliğinize uygun estetik şekilde giydiriyoruz.</p>
+                        </div>
+                        <div class="mob-list-arrow"><i class="fas fa-chevron-right"></i></div>
+                    </a>
+                    <a href="#hizmetler" class="mob-service-list-item">
+                        <img src="image/web-tasarim.webp" alt="Web Tasarım" class="mob-list-thumb">
+                        <div class="mob-list-info">
+                            <span class="mob-list-category">Dijital Hizmetler</span>
+                            <h3 class="mob-list-title">Web Tasarım &amp; Yazılım</h3>
+                            <p class="mob-list-desc">SEO uyumlu, mobil odaklı ve modern web siteleri tasarlıyoruz.</p>
+                        </div>
+                        <div class="mob-list-arrow"><i class="fas fa-chevron-right"></i></div>
+                    </a>
+                    <a href="#hizmetler" class="mob-service-list-item">
+                        <img src="image/seo-ve-google-ads.jpg" alt="SEO" class="mob-list-thumb">
+                        <div class="mob-list-info">
+                            <span class="mob-list-category">Dijital Hizmetler</span>
+                            <h3 class="mob-list-title">Dijital Reklam &amp; SEO</h3>
+                            <p class="mob-list-desc">Hedef kitlenize dijital dünyada doğrudan ulaşmanızı sağlıyoruz.</p>
+                        </div>
+                        <div class="mob-list-arrow"><i class="fas fa-chevron-right"></i></div>
+                    </a>
+                    <a href="#hizmetler" class="mob-service-list-item">
+                        <img src="image/kutu-harf.jpg" alt="Kutu Harf" class="mob-list-thumb">
+                        <div class="mob-list-info">
+                            <span class="mob-list-category">Baskı &amp; Harf</span>
+                            <h3 class="mob-list-title">Dijital Baskı &amp; Kutu Harf</h3>
+                            <p class="mob-list-desc">Yüksek çözünürlüklü baskı ve ışıklı kutu harf uygulamaları.</p>
+                        </div>
+                        <div class="mob-list-arrow"><i class="fas fa-chevron-right"></i></div>
+                    </a>
                 </div>
 
                 <div class="services-grid">
@@ -272,6 +461,63 @@
         </section>
     </main>
 
+    <!-- ===== MOBİL İLETİŞİM BÖLÜMÜ (Screen 5 – kartlar + harita + CTA) ===== -->
+    <section class="mob-contact-section" id="mob-iletisim">
+        <div class="container">
+            <div class="mob-section-header" style="margin-bottom:20px">
+                <h2 class="mob-section-title">İletişim</h2>
+            </div>
+            <div class="mob-contact-cards">
+                <a href="tel:+905431265878" class="mob-contact-card">
+                    <div class="mob-contact-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="mob-contact-info">
+                        <div class="mob-contact-label">Cep Telefonu</div>
+                        <div class="mob-contact-value">0543 126 58 78</div>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color:var(--text-muted);font-size:.8rem"></i>
+                </a>
+                <a href="tel:+902642811254" class="mob-contact-card">
+                    <div class="mob-contact-icon"><i class="fas fa-phone"></i></div>
+                    <div class="mob-contact-info">
+                        <div class="mob-contact-label">Sabit Hat</div>
+                        <div class="mob-contact-value">0264 281 12 54</div>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color:var(--text-muted);font-size:.8rem"></i>
+                </a>
+                <a href="mailto:info@krtreklambilisim.com" class="mob-contact-card">
+                    <div class="mob-contact-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="mob-contact-info">
+                        <div class="mob-contact-label">E-Posta</div>
+                        <div class="mob-contact-value">info@krtreklambilisim.com</div>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color:var(--text-muted);font-size:.8rem"></i>
+                </a>
+                <div class="mob-contact-card" style="cursor:default">
+                    <div class="mob-contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="mob-contact-info">
+                        <div class="mob-contact-label">Adres</div>
+                        <div class="mob-contact-value" style="font-size:.8rem;line-height:1.4">Tuzla Mah. Deveoğlu Cad. No:137/1/B<br>Adapazarı / SAKARYA</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Harita Alanı (Screen 5 alt görsel) -->
+            <div class="mob-map-area">
+                <img src="image/cephe-giydirme.jpg" alt="Konum" class="mob-map-bg">
+                <div class="mob-map-overlay">
+                    <div class="mob-map-pin"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="mob-map-address">
+                        <strong>KRT Reklam &amp; Bilişim</strong>
+                        <span>Adapazarı / SAKARYA</span>
+                    </div>
+                </div>
+            </div>
+            <!-- WhatsApp CTA (Screen 7 tarzı büyük buton) -->
+            <a href="https://wa.me/905431265878" class="mob-cta-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> WhatsApp ile Teklif Al
+            </a>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer id="iletisim" class="footer">
         <div class="container footer-grid">
@@ -362,6 +608,29 @@
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-tooltip">Size nasıl yardımcı olabiliriz?</span>
     </a>
+
+    <!-- ===== MOBİL ALT NAVİGASYON (5 sekmeli – Screen 2-6 arası geçiş) ===== -->
+    <nav class="mobile-bottom-nav" id="mobile-bottom-nav" aria-label="Ana navigasyon">
+        <a href="#anasayfa" class="mob-nav-item active" data-section="anasayfa">
+            <i class="fas fa-home"></i>
+            <span>Anasayfa</span>
+        </a>
+        <a href="#hizmetler" class="mob-nav-item" data-section="hizmetler">
+            <i class="fas fa-th-large"></i>
+            <span>Hizmetler</span>
+        </a>
+        <a href="https://wa.me/905431265878" class="mob-nav-item mob-nav-cta" target="_blank" aria-label="Teklif Al">
+            <i class="fas fa-plus"></i>
+        </a>
+        <a href="#referanslar" class="mob-nav-item" data-section="referanslar">
+            <i class="fas fa-images"></i>
+            <span>Referanslar</span>
+        </a>
+        <a href="#mob-iletisim" class="mob-nav-item" data-section="mob-iletisim">
+            <i class="fas fa-phone-alt"></i>
+            <span>İletişim</span>
+        </a>
+    </nav>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
