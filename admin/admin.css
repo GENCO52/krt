@@ -358,36 +358,56 @@
 
 .password-input-wrapper {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
-.password-input-wrapper input {
-    padding-left: 45px !important;
-    padding-right: 45px !important;
-    text-align: center;
+.password-input-wrapper input[type="password"],
+.password-input-wrapper input[type="text"] {
+    width: 100%;
+    padding: 13px 46px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: border-color .2s, box-shadow .2s;
+    outline: none;
+    text-align: left;
+}
+
+.password-input-wrapper input[type="password"]::placeholder,
+.password-input-wrapper input[type="text"]::placeholder {
+    color: var(--text-muted);
+}
+
+.password-input-wrapper input:focus {
+    border-color: var(--orange-primary);
+    box-shadow: 0 0 0 2px rgba(255,107,0,0.18);
 }
 
 .input-icon {
     position: absolute;
     left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
     color: var(--text-muted);
     pointer-events: none;
+    font-size: 0.9rem;
 }
 
 .pw-toggle-btn {
     position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
+    right: 12px;
     background: none;
     border: none;
     color: var(--text-muted);
     cursor: pointer;
-    padding: 4px;
-    font-size: .95rem;
+    padding: 6px;
+    font-size: 0.9rem;
     transition: color .2s;
     line-height: 1;
+    display: flex;
+    align-items: center;
 }
 
 .pw-toggle-btn:hover { color: var(--orange-primary); }
