@@ -129,6 +129,9 @@
     if (closeQuoteBtn) closeQuoteBtn.addEventListener('click', closeQuote);
     if (quoteModal)    quoteModal.addEventListener('click', e => { if (e.target === quoteModal) closeQuote(); });
 
+    // Google Apps Script URL — deploy sonrası buraya yapıştır
+    const GAS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+
     if (quoteForm) {
         quoteForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -137,16 +140,16 @@
                 quoteSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
             }
             try {
-                const formData = new FormData(quoteForm);
-                const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
-                const json = await res.json();
-                if (json.success) {
-                    if (quoteForm)    quoteForm.style.display = 'none';
-                    if (quoteSuccess) quoteSuccess.style.display = 'flex';
-                    setTimeout(closeQuote, 4000);
-                } else {
-                    throw new Error(json.message || 'Gönderilemedi');
-                }
+                // no-cors: GAS'a istek gider, CORS hatası olmadan mail gönderilir
+                await fetch(GAS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: new URLSearchParams(new FormData(quoteForm))
+                });
+                // no-cors modunda response okunamaz, mail gittiğini varsay
+                if (quoteForm)    quoteForm.style.display = 'none';
+                if (quoteSuccess) quoteSuccess.style.display = 'flex';
+                setTimeout(closeQuote, 4000);
             } catch (err) {
                 if (quoteSubmitBtn) {
                     quoteSubmitBtn.disabled = false;
