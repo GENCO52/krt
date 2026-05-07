@@ -2534,8 +2534,8 @@ section {
     }
     .portfolio-slider-footer { display: none; }
 
-    /* Referanslar — yatay kaydırmalı slider */
-    .portfolio-grid {
+    /* Index sayfası referanslar — yatay kaydırmalı slider */
+    .portfolio-grid:not(.full-grid) {
         display: flex !important;
         grid-template-columns: unset;
         overflow-x: auto;
@@ -2546,13 +2546,21 @@ section {
         padding-bottom: 4px;
         margin-bottom: 0;
     }
-    .portfolio-grid::-webkit-scrollbar { display: none; }
-    .portfolio-item {
+    .portfolio-grid:not(.full-grid)::-webkit-scrollbar { display: none; }
+    .portfolio-grid:not(.full-grid) .portfolio-item {
         flex: 0 0 160px;
         width: 160px;
         scroll-snap-align: start;
         aspect-ratio: 4/3;
         border-radius: var(--radius-sm);
+    }
+
+    /* Referanslar sayfası (full-grid) — 2 sütunlu dikey grid */
+    .portfolio-grid.full-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-bottom: 20px;
     }
 
     /* Diğer bölümler gizle (mobil iletişim kendi section'ı var) */
