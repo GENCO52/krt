@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Admin logo çift tıkla → ana sayfaya git
+    const adminLogo = document.getElementById('admin-nav-logo');
+    if (adminLogo) {
+        adminLogo.addEventListener('dblclick', (e) => {
+            e.preventDefault();
+            window.location.href = '../index.html';
+        });
+    }
+
     // Login Elements
     const loginOverlay = document.getElementById('login-overlay');
     const loginForm = document.getElementById('login-form');
