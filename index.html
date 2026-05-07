@@ -524,7 +524,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Harita Alanı — OpenStreetMap iframe (API key gerektirmez) -->
+            <!-- Harita Alanı — OpenStreetMap + tıklayınca maps uygulaması açılır -->
             <div class="mob-map-area">
                 <iframe
                     src="https://www.openstreetmap.org/export/embed.html?bbox=30.3950%2C40.7780%2C30.4150%2C40.7930&layer=mapnik&marker=40.7856%2C30.4050"
@@ -534,6 +534,11 @@
                     loading="lazy"
                     title="KRT Reklam & Bilişim Konum">
                 </iframe>
+                <!-- Şeffaf overlay — tıklayınca Google Maps uygulamasını açar -->
+                <a href="https://maps.google.com/maps?q=40.7856,30.4050"
+                   target="_blank"
+                   class="mob-map-overlay-link"
+                   aria-label="Google Maps'te görüntüle"></a>
             </div>
             <!-- WhatsApp CTA (Screen 7 tarzı büyük buton) -->
             <a href="https://wa.me/905431265878" class="mob-cta-btn" target="_blank">

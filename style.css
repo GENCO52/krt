@@ -2430,6 +2430,12 @@ section {
 }
 .mob-map-address strong { font-size: .9rem; font-family: var(--font-heading); }
 .mob-map-address span { font-size: .78rem; color: rgba(255,255,255,.7); }
+.mob-map-overlay-link {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    cursor: pointer;
+}
 
 /* Screen 7: Büyük CTA Butonu */
 .mob-cta-btn {
