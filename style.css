@@ -1981,6 +1981,37 @@ section {
     cursor: pointer;
 }
 .qf-textarea { resize: vertical; min-height: 140px; }
+
+/* Telefon 0-prefix grubu */
+.qf-phone-group {
+    display: flex;
+    align-items: stretch;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    transition: border-color .2s;
+}
+.qf-phone-group:focus-within { border-color: var(--orange-primary); }
+.qf-phone-prefix {
+    padding: 12px 10px 12px 14px;
+    color: var(--text-main);
+    font-size: .95rem;
+    font-weight: 700;
+    background: rgba(255,107,0,.08);
+    border-right: 1px solid var(--border-color);
+    user-select: none;
+    display: flex;
+    align-items: center;
+}
+.qf-phone-input {
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    flex: 1;
+    min-width: 0;
+}
+.qf-phone-input:focus { outline: none; border-color: transparent !important; }
 .qf-submit {
     width: 100%;
     padding: 15px;

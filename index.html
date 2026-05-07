@@ -623,12 +623,19 @@
 
                 <div class="qf-field">
                     <label class="qf-label" for="qf-phone">Telefon <span class="qf-required">*</span></label>
-                    <input class="qf-input" type="tel" id="qf-phone" name="phone" required placeholder="05XX XXX XX XX" autocomplete="tel">
+                    <div class="qf-phone-group">
+                        <span class="qf-phone-prefix">0</span>
+                        <input class="qf-input qf-phone-input" type="tel" id="qf-phone" name="phone_digits"
+                               required placeholder="5XX XXX XX XX" maxlength="10"
+                               inputmode="numeric" autocomplete="tel">
+                    </div>
                 </div>
 
                 <div class="qf-field">
                     <label class="qf-label" for="qf-email">E-posta</label>
-                    <input class="qf-input" type="email" id="qf-email" name="email" placeholder="ornek@mail.com" autocomplete="email">
+                    <input class="qf-input" type="email" id="qf-email" name="email"
+                           placeholder="ornek@mail.com" autocomplete="email"
+                           pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
                 </div>
 
                 <div class="qf-field">

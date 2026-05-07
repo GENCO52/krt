@@ -125,6 +125,26 @@
         document.body.style.overflow = '';
     };
 
+    // Telefon: sadece rakam, max 10 hane
+    if (quoteModal) {
+        quoteModal.addEventListener('input', (e) => {
+            if (!e.target.classList.contains('qf-phone-input')) return;
+            const inp = e.target;
+            inp.value = inp.value.replace(/\D/g, '').slice(0, 10);
+            inp.setCustomValidity(inp.value.length === 10 ? '' : '10 haneli telefon numarası girin (0 hariç)');
+        });
+        // E-posta geçerlilik mesajı
+        quoteModal.addEventListener('input', (e) => {
+            if (e.target.id !== 'qf-email') return;
+            const inp = e.target;
+            if (inp.value && !inp.validity.valid) {
+                inp.setCustomValidity('Geçerli bir e-posta adresi girin (örn: ad@mail.com)');
+            } else {
+                inp.setCustomValidity('');
+            }
+        });
+    }
+
     if (openQuoteBtn)  openQuoteBtn.addEventListener('click', openQuote);
     if (closeQuoteBtn) closeQuoteBtn.addEventListener('click', closeQuote);
     if (quoteModal)    quoteModal.addEventListener('click', e => { if (e.target === quoteModal) closeQuote(); });
@@ -140,12 +160,14 @@
                 quoteSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
             }
             try {
-                // no-cors: GAS'a istek gider, CORS hatası olmadan mail gönderilir
-                await fetch(GAS_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: new URLSearchParams(new FormData(quoteForm))
-                });
+                // Telefon: "0" + 10 hane birleştir
+                const params = new URLSearchParams(new FormData(quoteForm));
+                const phoneDigits = quoteModal.querySelector('.qf-phone-input');
+                if (phoneDigits) {
+                    params.delete('phone_digits');
+                    params.set('phone', '0' + phoneDigits.value);
+                }
+                await fetch(GAS_URL, { method: 'POST', mode: 'no-cors', body: params });
                 // no-cors modunda response okunamaz, mail gittiğini varsay
                 if (quoteForm)    quoteForm.style.display = 'none';
                 if (quoteSuccess) quoteSuccess.style.display = 'flex';
