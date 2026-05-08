@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Şifre göster/gizle toggle
+    const pwToggleBtn  = document.getElementById('pw-toggle');
+    const pwToggleIcon = document.getElementById('pw-toggle-icon');
+    const pwInput      = document.getElementById('admin-password');
+    if (pwToggleBtn && pwToggleIcon && pwInput) {
+        pwToggleBtn.addEventListener('click', () => {
+            const isHidden = pwInput.type === 'password';
+            pwInput.type = isHidden ? 'text' : 'password';
+            pwToggleIcon.className = isHidden ? 'fas fa-eye' : 'fas fa-eye-slash';
+        });
+    }
+
     // Admin logo çift tıkla → ana sayfaya git
     const adminLogo = document.getElementById('admin-nav-logo');
     if (adminLogo) {

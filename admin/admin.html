@@ -44,18 +44,6 @@
                 <a href="../index.html" class="btn btn-outline btn-block" style="margin-top:10px;text-align:center;">
                     <i class="fas fa-home"></i> Ana Sayfaya Dön
                 </a>
-                <script>
-                (function(){
-                    const btn  = document.getElementById('pw-toggle');
-                    const icon = document.getElementById('pw-toggle-icon');
-                    const inp  = document.getElementById('admin-password');
-                    if(btn) btn.addEventListener('click', () => {
-                        const show = inp.type === 'password';
-                        inp.type = show ? 'text' : 'password';
-                        icon.className = show ? 'fas fa-eye' : 'fas fa-eye-slash';
-                    });
-                })();
-                </script>
                 <div id="login-error" class="login-error hidden">Hatalı şifre!</div>
             </form>
         </div>
