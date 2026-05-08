@@ -47,9 +47,124 @@
 }
 
 @media (max-width: 768px) {
-    .admin-layout {
-        grid-template-columns: 1fr;
+    /* Layout */
+    .admin-sidebar { display: none; }
+    .admin-layout  { grid-template-columns: 1fr; gap: 0; }
+
+    /* Header kompakt */
+    .admin-body    { padding-top: 62px; }
+    .admin-header  { padding: 8px 0; }
+    .admin-badge   { display: none; }
+    .nav-logo-img  { height: 32px; }
+    .admin-nav-actions .btn { font-size: 0.72rem; padding: 7px 10px; }
+
+    /* Content */
+    .admin-main    { padding-top: 16px; padding-bottom: 30px; }
+    .admin-content { padding: 16px; }
+    .content-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
+    .content-header h2 { font-size: 1.1rem; }
+    .content-header .btn { width: 100%; justify-content: center; min-height: 48px; }
+
+    /* Referans liste kartları — tam genişlik, dokunulabilir */
+    .reference-item {
+        flex-direction: column !important;
+        gap: 0;
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        margin-bottom: 14px;
+    }
+    .reference-item img {
+        width: 100% !important;
+        height: 180px !important;
+        object-fit: cover;
+        border-radius: 0 !important;
+        flex-shrink: 0;
+    }
+    .reference-item-info { padding: 12px 14px 6px; }
+    .reference-item-info h3 { font-size: 1rem; }
+    .reference-item-actions {
+        display: flex !important;
+        gap: 8px;
+        padding: 8px 14px 14px;
+    }
+    .reference-item-actions .btn {
+        flex: 1;
+        min-height: 44px;
+        font-size: 0.85rem;
+        justify-content: center;
+    }
+
+    /* Modal → alttan açılan bottom sheet */
+    .modal {
+        padding: 0 !important;
+        align-items: flex-end !important;
+    }
+    .modal-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: 92vh !important;
+        border-radius: 16px 16px 0 0 !important;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        animation: slideUpSheet .3s ease;
+    }
+    @keyframes slideUpSheet {
+        from { transform: translateY(60%); opacity: .5; }
+        to   { transform: translateY(0);   opacity: 1; }
+    }
+    .modal-header {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: var(--bg-card);
+        border-radius: 16px 16px 0 0;
+        padding: 14px 20px;
+    }
+    .modal-header::before {
+        content: '';
+        display: block;
+        width: 36px;
+        height: 4px;
+        background: var(--border-color);
+        border-radius: 2px;
+        margin: 0 auto 12px;
+    }
+    .modal-body  { padding: 16px 20px; }
+    .modal-footer {
+        position: sticky;
+        bottom: 0;
+        background: var(--bg-card);
+        padding: 12px 20px max(16px, env(safe-area-inset-bottom));
+        flex-direction: column-reverse;
+        gap: 8px;
+        border-top: 1px solid var(--border-color);
+    }
+    .modal-footer .btn {
+        width: 100%;
+        justify-content: center;
+        min-height: 48px;
+        font-size: 1rem;
+    }
+
+    /* Form alanları dokunma dostu */
+    .form-group { margin-bottom: 16px; }
+    .form-group label { font-size: 0.85rem; margin-bottom: 6px; }
+    .form-group input[type="text"],
+    .form-group select,
+    .form-group textarea {
+        padding: 14px 12px;
+        font-size: 1rem;
+    }
+    .form-group textarea { min-height: 100px; }
+    .form-group input[type="file"] { padding: 12px; font-size: 0.9rem; }
+
+    /* Login kartı mobil */
+    .login-card { padding: 28px 20px; }
+    .login-header h2 { font-size: 1.5rem; }
 }
 
 .admin-sidebar {

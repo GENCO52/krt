@@ -128,6 +128,20 @@
         });
     }
 
+    // --- Mobil logo çift dokunma → admin girişi ---
+    const mobLogo = document.querySelector('.mob-logo-link');
+    if (mobLogo) {
+        let lastTap = 0;
+        mobLogo.addEventListener('touchend', (e) => {
+            const now = Date.now();
+            if (now - lastTap < 400) {
+                e.preventDefault();
+                window.location.href = 'admin/admin.html';
+            }
+            lastTap = now;
+        });
+    }
+
     // --- Referans slider ok butonları (mobilde yatay scroll) ---
     const refPrev = document.getElementById('portfolio-prev');
     const refNext = document.getElementById('portfolio-next');
